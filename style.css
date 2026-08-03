@@ -315,10 +315,36 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
 .week-stop.active .week-row:hover .week-row-arrow{opacity:1;transform:translateX(4px);}
 
 /* Single feature photo inside the Week 0 modal — no placeholder tiles */
-.week-photo-figure{margin:20px 0 30px;}
-.week-photo-figure img{width:100%;max-height:420px;object-fit:contain;background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);display:block;margin:0 auto;}
-@media (max-width:600px){.week-photo-figure img{max-height:320px;}}
-.week-photo-caption{margin-top:12px;font-size:0.85rem;color:var(--ink-faint);font-style:italic;line-height:1.5;}
+/* Week Photo */
+.week-photo-figure{
+    margin:30px 0;
+    text-align:center;
+}
+
+.week-photo-figure img{
+    width:90%;
+    max-width:900px;
+    height:auto;
+    object-fit:cover;
+    background:transparent;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    display:block;
+    margin:0 auto;
+}
+
+@media (max-width:600px){
+    .week-photo-figure img{
+        width:100%;
+    }
+}
+
+.week-photo-caption{
+    margin-top:12px;
+    font-size:0.9rem;
+    color:var(--ink-faint);
+    font-style:italic;
+}
 
 .reflection-block{padding:22px 24px;border-radius:16px;background:var(--paper);border-left:3px solid var(--teal);}
 .reflection-label{font-family:var(--font-mono);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px;}
