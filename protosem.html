@@ -111,11 +111,10 @@ const protosemData = {
   },
   1: {
     title: 'Week 1',
-     photo:{
+    photo:{
         img:'assets/week1.jpeg',
         caption:'Hands-on hardware session involving desoldering, PCB handling, sensors, and Arduino.'
     },
-
     entries: [
       {
         heading: 'Desoldering Hardware Components',
@@ -145,6 +144,71 @@ const protosemData = {
       }
     ],
     reflection: 'Week 1 moved from mindset into hands-on hardware — learning to desolder components carefully, running my workspace on 5S principles, and getting comfortable with Arduino and sensors as the building blocks for smart electronics.'
+  },
+  2: {
+    title: 'Week 2',
+    entries: [
+      {
+        heading: 'Innovation & Entrepreneurial Thinking',
+        paragraphs: [
+          'I attended the YEP Signature Session by Prof. Mukesh Sud, where he shared valuable insights from his books and entrepreneurial journey. The session emphasized that innovation begins with understanding real-world problems, thinking beyond conventional solutions, and continuously learning from experiences.',
+          'The talk inspired me to approach challenges with curiosity, creativity, and a problem-solving mindset while understanding how successful products are built around customer needs rather than technology alone.'
+        ]
+      },
+      {
+        heading: 'Computational Thinking & Algorithms',
+        paragraphs: [
+          'Through the "Think Like a Coder" learning series, I explored the fundamentals of computational thinking and problem solving. I practiced writing algorithms to break complex problems into simple, logical steps before implementing a solution.',
+          'This activity strengthened my analytical thinking and improved my ability to design structured solutions before writing code.'
+        ]
+         ,photo: {img:'assets/week2-computational-thinking.jpeg', caption:'Think Like a Coder session'}
+      },
+      {
+        heading: 'Creative Storytelling with Scratch',
+        paragraphs: [
+          'I learned the basics of Scratch programming by creating interactive animations and simple stories using visual programming blocks. This activity demonstrated how programming concepts such as sequencing, events, and logic can be applied creatively.',
+          'Building animations helped me understand the importance of logical flow while making learning engaging and interactive.'
+        ]
+        , photo: {img:'assets/week2-scratch.png', caption:'Scratch animation project'}
+      },
+      {
+        heading: 'Python Programming Fundamentals',
+        paragraphs: [
+          'I was introduced to the fundamentals of Python programming, including basic syntax, variables, input/output, conditional statements, loops, and simple programming concepts.',
+          'This session provided a strong foundation for understanding programming logic and prepared me for developing software applications.'
+        ]
+      },
+      {
+        heading: 'Mobile App Development with MIT App Inventor',
+        paragraphs: [
+          'I explored MIT App Inventor and began designing a mobile application based on a selected problem statement. I learned how to build user interfaces, connect components using block programming, and understand the complete workflow of mobile application development.',
+          'This activity demonstrated how software can be transformed into practical solutions for real-world problems.'
+        ]
+        , photo: {img:'assets/week2-app-inventor.jpeg', caption:'MIT App Inventor project'}
+      },
+      {
+        heading: 'Design Thinking & Customer Discovery',
+        paragraphs: [
+          'I attended a session on Innovation Thinking, Design Thinking, Customer Discovery, and Lean Startup. The session explained the importance of identifying genuine customer problems, validating assumptions through user interaction, and developing solutions through continuous iteration.',
+          'I learned that successful innovation is driven by understanding users, testing ideas early, and improving products based on customer feedback rather than assumptions.'
+        ]
+      },
+      {
+        heading: 'Key Learnings',
+        paragraphs: [],
+        list: [
+          'Innovation starts with understanding customer problems.',
+          'Computational thinking simplifies complex challenges.',
+          'Algorithm design improves logical problem-solving.',
+          'Scratch introduced programming through visual storytelling.',
+          'Python strengthened my programming fundamentals.',
+          'MIT App Inventor enabled practical mobile app development.',
+          'Design Thinking emphasizes empathy and customer-centric innovation.',
+          'Lean Startup encourages testing ideas before full-scale development.'
+        ]
+      }
+    ],
+    reflection: "Week 2 expanded my understanding from hardware to software, innovation, and product development. I learned that successful products are built by combining logical thinking, creativity, customer understanding, and continuous experimentation. This week strengthened both my technical skills and my ability to think from a user's perspective."
   }
 };
 
@@ -191,6 +255,7 @@ function openWeekModal(week){
     <div class="modal-entry">
       <h4>${entry.heading}</h4>
       ${entry.paragraphs.map(p => `<p>${p}</p>`).join('')}
+      ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
       ${entry.list ? `${entry.listLabel ? `<p style="font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:2px;">${entry.listLabel}</p>` : ''}<ul>${entry.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
     </div>
   `).join('');
