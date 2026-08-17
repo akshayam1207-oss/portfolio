@@ -346,6 +346,38 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
     font-style:italic;
 }
 
+/* Photo grid — used for entries with multiple images (e.g. Week 3, 2-per-row) */
+.week-photo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin:20px 0;
+}
+.week-photo-grid-item{
+    margin:0;
+    text-align:center;
+}
+.week-photo-grid-item img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:14px;
+    box-shadow:0 8px 22px rgba(0,0,0,0.12);
+    display:block;
+}
+.week-photo-grid-item .week-photo-caption{
+    margin-top:8px;
+    font-size:0.8rem;
+}
+@media (max-width:600px){
+    .week-photo-grid{
+        grid-template-columns:1fr;
+    }
+    .week-photo-grid-item img{
+        height:auto;
+    }
+}
+
 .reflection-block{padding:22px 24px;border-radius:16px;background:var(--paper);border-left:3px solid var(--teal);}
 .reflection-label{font-family:var(--font-mono);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px;}
 

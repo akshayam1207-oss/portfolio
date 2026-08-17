@@ -72,7 +72,17 @@
 /* To add or change a week's photo, set the "photo" field on that week's data below:
    photo: {img:'assets/your-image.jpg', caption:'Your caption'}
    Drop the image file into an "assets" folder next to this page and point img at it.
-   Leave "photo" out entirely for a week with no image (like Week 1 below). */
+   Leave "photo" out entirely for a week with no image (like Week 1 below).
+
+   To add a ROW OF PHOTOS inside a specific entry (e.g. 4 images before "Key Learnings"),
+   use "photoGrid" on that entry instead of "photo":
+   photoGrid: [
+     {img:'assets/week3-photo1.jpg', caption:'...'},
+     {img:'assets/week3-photo2.jpg', caption:'...'},
+     {img:'assets/week3-photo3.jpg', caption:'...'},
+     {img:'assets/week3-photo4.jpg', caption:'...'}
+   ]
+   These render 2-per-row automatically. */
 const protosemData = {
   0: {
     title: 'Week 0',
@@ -209,6 +219,43 @@ const protosemData = {
       }
     ],
     reflection: "Week 2 expanded my understanding from hardware to software, innovation, and product development. I learned that successful products are built by combining logical thinking, creativity, customer understanding, and continuous experimentation. This week strengthened both my technical skills and my ability to think from a user's perspective."
+  },
+  3: {
+    title: 'Week 3',
+    entries: [
+      {
+        heading: 'Electronics Fundamentals & 3D Product Design',
+        paragraphs: [
+          'Week 3 was a hands-on exploration of electronics fundamentals and 3D product design. I learned the basics of voltage, current, resistance and Ohm\u2019s Law, along with the purpose and behaviour of components such as resistors, capacitors and diodes. The practical activities helped me understand how individual components contribute to an electronic system and why careful handling is important.',
+          'Along with electronics, I was introduced to Autodesk Fusion 360, where I explored how physical ideas can be represented digitally. I learned to create 2D sketches, apply dimensions and constraints, and gradually develop them into 3D models using different modelling tools.',
+          'The modelling activities helped me understand shape, proportion, curves, dimensions and spatial relationships more clearly. I also experimented with different tools and approaches, corrected mistakes, and refined the models as I progressed. This made the process more than just creating a model\u2014it helped me understand how design develops through observation and iteration.'
+        ],
+        photoGrid: [
+          {img:'assets/week3-Photo1.png', caption:'3D mechanical component model created in Autodesk Fusion 360'},
+          {img:'assets/week3-photo2.png', caption:'3D car model developed using Fusion 360 modelling tools'},
+          {img:'assets/week3-photo3.png', caption:'2D sketching and product shape development in Autodesk Fusion 360'},
+          {img:'assets/week3-photo4.png', caption:'3D scissors model created using Fusion 360'}
+        ]
+      },
+      {
+        heading: 'Key Learnings',
+        paragraphs: [],
+        list: [
+          'Basic electronics and circuit fundamentals',
+          'Voltage, current, resistance and Ohm\u2019s Law',
+          'Functions of resistors, capacitors and diodes',
+          'Safe and careful handling of electronic components',
+          'Introduction to Autodesk Fusion 360',
+          'Creating 2D sketches with dimensions and constraints',
+          'Converting sketches into 3D forms',
+          'Understanding shapes, proportions and spatial relationships',
+          'Developing accuracy and attention to detail',
+          'Experimenting, identifying mistakes and improving designs',
+          'Connecting physical objects with digital product design'
+        ]
+      }
+    ],
+    reflection: 'Week 3 helped me understand that engineering involves both designing and experimenting. Working with electronic components gave me exposure to the physical side of engineering, while Fusion 360 introduced me to the digital side of product design. The combination helped me develop a better understanding of how an idea can be observed, designed, modelled, tested and improved through iteration.'
   }
 };
 
@@ -256,6 +303,16 @@ function openWeekModal(week){
       <h4>${entry.heading}</h4>
       ${entry.paragraphs.map(p => `<p>${p}</p>`).join('')}
       ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
+      ${entry.photoGrid ? `
+        <div class="week-photo-grid">
+          ${entry.photoGrid.map(p => `
+            <figure class="week-photo-grid-item">
+              <img src="${p.img}" alt="${p.caption}">
+              <figcaption class="week-photo-caption">${p.caption}</figcaption>
+            </figure>
+          `).join('')}
+        </div>
+      ` : ''}
       ${entry.list ? `${entry.listLabel ? `<p style="font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:2px;">${entry.listLabel}</p>` : ''}<ul>${entry.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
     </div>
   `).join('');
