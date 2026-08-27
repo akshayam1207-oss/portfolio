@@ -69,6 +69,20 @@
 <script src="script.js"></script>
 <script>
 /* ---------- ProtoSem week data ---------- */
+/* To add or change a week's photo, set the "photo" field on that week's data below:
+   photo: {img:'assets/your-image.jpg', caption:'Your caption'}
+   Drop the image file into an "assets" folder next to this page and point img at it.
+   Leave "photo" out entirely for a week with no image (like Week 1 below).
+
+   To add a ROW OF PHOTOS inside a specific entry (e.g. 4 images before "Key Learnings"),
+   use "photoGrid" on that entry instead of "photo":
+   photoGrid: [
+     {img:'assets/week3-photo1.jpg', caption:'...'},
+     {img:'assets/week3-photo2.jpg', caption:'...'},
+     {img:'assets/week3-photo3.jpg', caption:'...'},
+     {img:'assets/week3-photo4.jpg', caption:'...'}
+   ]
+   These render 2-per-row automatically. */
 const protosemData = {
   0: {
     title: 'Week 0',
@@ -217,10 +231,10 @@ const protosemData = {
           'The modelling activities helped me understand shape, proportion, curves, dimensions and spatial relationships more clearly. I also experimented with different tools and approaches, corrected mistakes, and refined the models as I progressed. This made the process more than just creating a model\u2014it helped me understand how design develops through observation and iteration.'
         ],
         photoGrid: [
-          {img:'assets/Week3-Photo1.png', caption:'3D mechanical component model created in Autodesk Fusion 360'},
-          {img:'assets/week3-photo2.png', caption:'3D car model developed using Fusion 360 modelling tools'},
-          {img:'assets/week3-photo3.png', caption:'2D sketching and product shape development in Autodesk Fusion 360'},
-          {img:'assets/week3-photo4.png', caption:'3D scissors model created using Fusion 360'}
+          {img:'assets/week3-photo1.jpg', caption:'Electronics fundamentals — components & circuit basics'},
+          {img:'assets/week3-photo2.jpg', caption:'Practical session with resistors, capacitors and diodes'},
+          {img:'assets/week3-photo3.jpg', caption:'2D sketching in Autodesk Fusion 360'},
+          {img:'assets/week3-photo4.jpg', caption:'3D model development in Fusion 360'}
         ]
       },
       {
@@ -242,9 +256,194 @@ const protosemData = {
       }
     ],
     reflection: 'Week 3 helped me understand that engineering involves both designing and experimenting. Working with electronic components gave me exposure to the physical side of engineering, while Fusion 360 introduced me to the digital side of product design. The combination helped me develop a better understanding of how an idea can be observed, designed, modelled, tested and improved through iteration.'
+  },
+  4: {
+    title: 'Week 4',
+    entries: [
+
+    {
+      heading: 'Fusion 360 — Reference-Based Product Animation',
+
+      paragraphs: [
+        'Week 4 began with a hands-on product modelling and animation activity using Autodesk Fusion 360. The objective was to understand how a real-world product can be studied from a reference image, digitally reconstructed, and then converted into an interactive 3D assembly.',
+
+        'For this activity, I selected a bottle as my reference product. I imported the bottle image into Fusion 360 as a canvas and used it as a visual guide while creating the model. I carefully observed the overall proportions, curves, height, width, neck and cap structure of the bottle and tried to reproduce these details as accurately as possible in the 3D environment.',
+
+        'After creating the individual parts, I organized the model as an assembly and worked with components and joints. I applied appropriate joint types between the parts and experimented with motion limits to make the bottle components behave more realistically. This helped me understand the relationship between the geometry of a product and the way its physical parts move.',
+
+        'The activity also taught me that modelling is not only about creating the correct shape. Small differences in dimensions, alignment and constraints can affect the final result significantly. By adjusting the model repeatedly, I improved my understanding of accuracy, proportion, assembly structure and motion control in Fusion 360.'
+      ],
+
+      photoGrid: [
+        {
+          img:'assets/week4-photo2.png',
+          caption:'Recreating the bottle model in Fusion 360 using a reference image'
+        },
+        {
+          img:'assets/week4-photo1.png',
+          caption:'Applying joints and setting motion limits for the bottle cap assembly'
+        }
+      ],
+
+      listLabel: 'What I Practiced',
+
+      list: [
+        'Importing a real product image as a reference canvas',
+        'Observing product proportions and physical structure',
+        'Creating and refining 3D geometry in Fusion 360',
+        'Organizing a model into separate components',
+        'Applying joints between components',
+        'Setting motion limits for realistic movement',
+        'Improving accuracy through repeated adjustments'
+      ]
+    },
+
+
+    {
+      heading: 'Computer-Controlled Cutting — Laser Cutting at FORGE',
+
+      paragraphs: [
+        'The next session introduced me to computer-controlled manufacturing through laser cutting at the FORGE lab. Unlike digital modelling, where the final result exists mainly inside the software, this activity showed me how a digital design can be converted into an actual physical object using a computer-controlled machine.',
+
+        'We first received safety training and learned the basic operating procedure of the CO2 laser cutter. Understanding machine safety was an important part of the activity because the laser cutter uses a high-power laser and requires proper handling of the material, machine settings and working environment.',
+
+        'I was introduced to RDWorks V8, the software used to prepare and control the laser cutting process. I learned how to import the design, position it correctly, prepare the cutting file and configure parameters required for the machine. I also understood that different operations such as cutting and engraving require different settings.',
+
+        'Each of us selected a design and prepared it for cutting. I worked with the design by checking its outline and making sure it was suitable for the selected material. I then observed how parameters such as cutting speed, laser power and kerf influence the final physical output.',
+
+        'The most useful part of this session was seeing the complete digital-to-physical workflow. A design that initially existed only as a digital file was transformed into a real part through a sequence of software preparation, machine setup and controlled cutting. This gave me a better understanding of practical manufacturing constraints and the importance of accuracy before sending a design to a machine.'
+      ],
+
+      photoGrid: [
+        {
+          img:'assets/week4-photo3.png',
+          caption:'Reference design and vector outline prepared for laser cutting'
+        },
+        {
+          img:'assets/week4-photo4.png',
+          caption:'Preparing and configuring the design file in RDWorks V8'
+        },
+        {
+          img:'assets/week4-photo5.jpeg',
+          caption:'The CO2 laser cutter operating and cutting the selected design'
+        },
+        {
+          img:'assets/week4-photo6.jpeg',
+          caption:'Final physical part produced after the laser cutting process'
+        }
+      ],
+
+      listLabel: 'What I Learned',
+
+      list: [
+        'Basic safety procedures for operating a CO2 laser cutter',
+        'Preparing digital designs for computer-controlled manufacturing',
+        'Using RDWorks V8 for laser cutting operations',
+        'Understanding the difference between cutting and engraving',
+        'Understanding the effect of speed and power settings',
+        'Understanding kerf and material thickness',
+        'Converting a digital design into a physical part',
+        'Recognizing real-world manufacturing constraints'
+      ]
+    },
+
+
+    {
+      heading: 'Animation Recreation — From Reference Video to Fusion 360',
+
+      paragraphs: [
+        'For the next activity, I selected a mechanical animation as a reference and attempted to recreate its movement using Autodesk Fusion 360. The purpose of this exercise was not simply to reproduce the appearance of the animation, but to understand the mechanical logic behind the movement and translate that movement into joints, constraints and timed actions.',
+
+        'I first observed the reference animation carefully and broke the overall movement into smaller steps. Instead of treating the mechanism as one complex movement, I identified the individual components that were rotating or moving and considered how they were connected to each other.',
+
+        'I then recreated the mechanism in Fusion 360 and experimented with different joint types to reproduce the required movement. I used the animation timeline to control the sequence and adjusted the movement until the recreated animation followed the same general behaviour as the reference.',
+
+        'This activity helped me understand how mechanical motion can be represented digitally. I learned that choosing the correct joint and setting suitable motion limits are important for producing natural and controlled movement. Even small changes in joint positions, limits or timing can change the way the entire mechanism behaves.',
+
+        'The exercise also improved my observation and problem-solving skills because I had to repeatedly compare my animation with the reference, identify differences and make adjustments. It showed me how animation can be used not only for visual presentation but also for understanding and communicating mechanical mechanisms.'
+      ],
+
+      video: {
+        url:'assets/week4-animation.mp4',
+        caption:'My Fusion 360 animation recreated from the selected reference mechanism'
+      },
+
+      photoGrid: [
+        {
+          img:'assets/week4-photo7.png',
+          caption:'Setting up the animation timeline and movement sequence in Fusion 360'
+        },
+        {
+          img:'assets/week4-photo8.png',
+          caption:'Final recreated mechanism and animation in Fusion 360'
+        }
+      ],
+
+      listLabel: 'What I Practiced',
+
+      list: [
+        'Observing and analysing mechanical motion',
+        'Breaking complex motion into smaller movements',
+        'Selecting suitable joints for different components',
+        'Setting motion limits and constraints',
+        'Using the Fusion 360 animation timeline',
+        'Comparing the recreated animation with a reference',
+        'Iterating and refining movement for a better result'
+      ]
+    },
+
+
+    {
+      heading: 'Fun Debate Session',
+
+      paragraphs: [
+        'We concluded the week with a fun and interactive debate session. Although it was different from the technical activities, it provided an opportunity to practise an important skill that is equally valuable in product engineering — communication.',
+
+        'During the debate, I had to think quickly, understand the topic, organize my thoughts and express my opinion clearly. Listening to other participants also helped me understand that the same topic can be viewed from different perspectives.',
+
+        'The session encouraged me to become more comfortable speaking in front of others and responding to different opinions. It also showed me the importance of listening before responding, supporting an argument with reasoning, and communicating ideas in a simple and understandable way.',
+
+        'This activity was a refreshing break from the technical sessions while still contributing to my overall development. It helped me practise confidence, quick thinking, active listening and effective communication.'
+      ],
+
+      listLabel: 'Skills I Developed',
+
+      list: [
+        'Expressing ideas clearly',
+        'Thinking quickly during discussions',
+        'Active listening',
+        'Understanding different perspectives',
+        'Building confidence while speaking',
+        'Communicating opinions with reasoning'
+      ]
+    },
+
+
+    {
+      heading: 'Key Learnings',
+
+      paragraphs: [],
+
+      list: [
+        'Using reference images to accurately recreate real-world products in Fusion 360',
+        'Understanding components, assemblies, joints and motion constraints',
+        'Creating controlled movement using Fusion 360 animation tools',
+        'Understanding the complete laser cutting workflow at FORGE',
+        'Using RDWorks V8 to prepare and control laser cutting jobs',
+        'Understanding practical parameters such as speed, power, material thickness and kerf',
+        'Converting a digital design into a physical manufactured part',
+        'Analysing mechanical movement and recreating it digitally',
+        'Improving designs through observation, comparison and iteration',
+        'Developing communication, confidence and quick-thinking skills through debate'
+      ]
+    }
+
+  ],
+
+  reflection:
+    'Week 4 was a combination of digital design, physical manufacturing, animation and communication. I moved from recreating a real product in Fusion 360 to understanding how components can be assembled and animated using joints and motion limits. The laser cutting session then showed me how a digital design can be transformed into a physical part while considering real-world manufacturing constraints. Recreating a mechanical animation strengthened my ability to observe movement, break it into smaller actions and represent it digitally. Finally, the debate session reminded me that technical knowledge alone is not enough — being able to communicate ideas, listen to others and confidently explain my thinking is also an important part of becoming a better product engineer.'
   }
 };
-
 const TOTAL_WEEKS = 20;
 const weekRail = document.getElementById('weekRail');
 
@@ -289,6 +488,23 @@ function openWeekModal(week){
       <h4>${entry.heading}</h4>
       ${entry.paragraphs.map(p => `<p>${p}</p>`).join('')}
       ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
+      ${entry.video ? `
+  <div class="week-video-wrap">
+    <video
+      controls
+      preload="metadata"
+      playsinline
+      class="week-local-video"
+      title="${entry.video.caption}">
+      <source src="${entry.video.url}" type="video/mp4">
+      Your browser does not support the video element.
+    </video>
+  </div>
+
+  <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:14px;">
+    ${entry.video.caption}
+  </figcaption>
+` : ''}
       ${entry.photoGrid ? `
         <div class="week-photo-grid">
           ${entry.photoGrid.map(p => `
