@@ -82,7 +82,16 @@
      {img:'assets/week3-photo3.jpg', caption:'...'},
      {img:'assets/week3-photo4.jpg', caption:'...'}
    ]
-   These render 2-per-row automatically. */
+   These render 2-per-row automatically.
+
+   To show a ROW OF PHOTOS followed by a VIDEO BELOW them (e.g. Week 7's ESP32 entry),
+   use "photoRow" (array, 2 images side by side) together with "video" on the same entry:
+   photoRow: [
+     {img:'assets/photo1.jpg', caption:'...'},
+     {img:'assets/photo2.jpg', caption:'...'}
+   ],
+   video: {url:'assets/video.mp4', caption:'...'}
+   The two photos render side by side first, then the video renders full-width underneath. */
 const protosemData = {
   0: {
     title: 'Week 0',
@@ -269,8 +278,6 @@ const protosemData = {
 
         'For this activity, I selected a bottle as my reference product. I imported the bottle image into Fusion 360 as a canvas and used it as a visual guide while creating the model. I carefully observed the overall proportions, curves, height, width, neck and cap structure of the bottle and tried to reproduce these details as accurately as possible in the 3D environment.',
 
-        'After creating the individual parts, I organized the model as an assembly and worked with components and joints. I applied appropriate joint types between the parts and experimented with motion limits to make the bottle components behave more realistically. This helped me understand the relationship between the geometry of a product and the way its physical parts move.',
-
         'The activity also taught me that modelling is not only about creating the correct shape. Small differences in dimensions, alignment and constraints can affect the final result significantly. By adjusting the model repeatedly, I improved my understanding of accuracy, proportion, assembly structure and motion control in Fusion 360.'
       ],
 
@@ -300,18 +307,15 @@ const protosemData = {
 
 
     {
-      heading: 'Computer-Controlled Cutting — Laser Cutting at FORGE',
+      heading: 'Computer-Controlled Cutting — Laser Cutting',
 
       paragraphs: [
         'The next session introduced me to computer-controlled manufacturing through laser cutting at the FORGE lab. Unlike digital modelling, where the final result exists mainly inside the software, this activity showed me how a digital design can be converted into an actual physical object using a computer-controlled machine.',
-
-        'We first received safety training and learned the basic operating procedure of the CO2 laser cutter. Understanding machine safety was an important part of the activity because the laser cutter uses a high-power laser and requires proper handling of the material, machine settings and working environment.',
 
         'I was introduced to RDWorks V8, the software used to prepare and control the laser cutting process. I learned how to import the design, position it correctly, prepare the cutting file and configure parameters required for the machine. I also understood that different operations such as cutting and engraving require different settings.',
 
         'Each of us selected a design and prepared it for cutting. I worked with the design by checking its outline and making sure it was suitable for the selected material. I then observed how parameters such as cutting speed, laser power and kerf influence the final physical output.',
 
-        'The most useful part of this session was seeing the complete digital-to-physical workflow. A design that initially existed only as a digital file was transformed into a real part through a sequence of software preparation, machine setup and controlled cutting. This gave me a better understanding of practical manufacturing constraints and the importance of accuracy before sending a design to a machine.'
       ],
 
       photoGrid: [
@@ -352,15 +356,14 @@ const protosemData = {
       heading: 'Animation Recreation — From Reference Video to Fusion 360',
 
       paragraphs: [
-        'For the next activity, I selected a mechanical animation as a reference and attempted to recreate its movement using Autodesk Fusion 360. The purpose of this exercise was not simply to reproduce the appearance of the animation, but to understand the mechanical logic behind the movement and translate that movement into joints, constraints and timed actions.',
+        'For the next activity, I selected a mechanical animation as a reference and attempted to recreate its movement using Autodesk Fusion 360.',
 
         'I first observed the reference animation carefully and broke the overall movement into smaller steps. Instead of treating the mechanism as one complex movement, I identified the individual components that were rotating or moving and considered how they were connected to each other.',
 
         'I then recreated the mechanism in Fusion 360 and experimented with different joint types to reproduce the required movement. I used the animation timeline to control the sequence and adjusted the movement until the recreated animation followed the same general behaviour as the reference.',
 
-        'This activity helped me understand how mechanical motion can be represented digitally. I learned that choosing the correct joint and setting suitable motion limits are important for producing natural and controlled movement. Even small changes in joint positions, limits or timing can change the way the entire mechanism behaves.',
+        'This activity helped me understand how mechanical motion can be represented digitally. I learned that choosing the correct joint and setting suitable motion limits are important for producing natural and controlled movement.',
 
-        'The exercise also improved my observation and problem-solving skills because I had to repeatedly compare my animation with the reference, identify differences and make adjustments. It showed me how animation can be used not only for visual presentation but also for understanding and communicating mechanical mechanisms.'
       ],
 
       video: {
@@ -401,21 +404,9 @@ const protosemData = {
 
         'During the debate, I had to think quickly, understand the topic, organize my thoughts and express my opinion clearly. Listening to other participants also helped me understand that the same topic can be viewed from different perspectives.',
 
-        'The session encouraged me to become more comfortable speaking in front of others and responding to different opinions. It also showed me the importance of listening before responding, supporting an argument with reasoning, and communicating ideas in a simple and understandable way.',
-
         'This activity was a refreshing break from the technical sessions while still contributing to my overall development. It helped me practise confidence, quick thinking, active listening and effective communication.'
       ],
 
-      listLabel: 'Skills I Developed',
-
-      list: [
-        'Expressing ideas clearly',
-        'Thinking quickly during discussions',
-        'Active listening',
-        'Understanding different perspectives',
-        'Building confidence while speaking',
-        'Communicating opinions with reasoning'
-      ]
     },
 
 
@@ -584,6 +575,175 @@ const protosemData = {
 
   reflection:
     'Week 5 shifted my focus from designing products to understanding the people for whom the product is being designed. The UI/UX introduction helped me understand that a good interface is only meaningful when it is supported by proper user research. Learning Figma gave me exposure to the design side, while preparing surveys, conducting conversations, and collecting responses showed me the research side of the process. Working on our women safety problem statement made the learning more practical because we had to move beyond assumptions and gather real evidence from users and stakeholders. Preparing the SRD, discussing the problem as a team, and collecting feedback from college staff and parents helped me understand how a broad problem can gradually be refined into a clear and validated problem statement. The biggest learning from this week was that before building any solution, it is important to listen, observe, ask the right questions, and understand the problem deeply.'
+},
+
+6: {
+  title: 'Week 6',
+
+  entries: [
+
+    {
+      heading: "Problem Statement and Challenge Brief",
+      paragraphs: [
+        "This week, we continued working on our selected problem statement by referring to the challenge brief and understanding the requirements of the problem in greater detail.",
+
+        "We reviewed the survey responses and data collected during our user research process to better understand the users' needs, concerns, and expectations. The collected information helped us connect the problem statement with real user perspectives rather than relying only on assumptions.",
+
+        "We also had a discussion with Charath Sir, who provided valuable guidance on understanding the problem, interpreting the collected information, and moving towards a practical solution. His feedback helped us refine our approach and identify the important aspects that should be considered while developing the solution."
+      ]
+    },
+
+    {
+      heading: "Developing the UI/UX Solution",
+      paragraphs: [
+        "During this session, we focused on developing a UI/UX solution for the finance-tracking problem statement that we had selected.",
+
+        "We worked on the initial structure of the solution and planned the screens and user flow based on the requirements of the selected problem statement. We then created wireframes in Figma to represent the basic layout and interaction flow of the proposed solution.",
+
+        "This activity helped us understand how to move from a problem statement to a practical digital solution. Creating the wireframes also helped us visualize the user journey, organize the required screens, and identify areas that could be improved before developing the final interface."
+      ],
+      photoGrid: [
+        {
+          img: "assets/week6-photo1.jpeg",
+          caption: "Developing the initial UI/UX solution based on the identified user needs"
+        },
+        {
+          img: "assets/week6-photo2.jpeg",
+          caption: "Creating the solution wireframe and user flow in Figma"
+        }
+      ]
+    },
+
+    {
+      heading: "Arduino Fundamentals Session",
+      paragraphs: [
+        "We attended a full-day introductory session on Arduino and basic electronics. The session provided an overview of Arduino-based development and helped us become familiar with the fundamentals required for working with electronic components and microcontroller-based systems.",
+
+        "The session gave us an opportunity to understand the basic workflow involved in building and working with simple Arduino-based electronic projects. It also helped us become more comfortable with practical electronics activities that were later useful during the hands-on sessions."
+      ]
+    },
+
+    {
+      heading: "Soldering and Electronics Assembly",
+      paragraphs: [
+        "We then moved on to a hands-on electronics activity where each student was provided with individual electronic components and the required materials for assembly. Unlike a team-based activity, this task required each of us to independently complete the given circuit and connections.",
+
+        "We were provided with a soldering machine and the necessary tools and components. We individually placed and soldered the components onto the board, established the required connections, and assembled the circuit carefully.",
+
+        "After completing the soldering and connections, we connected the battery and checked the completed assembly. This activity gave us practical experience in component handling, soldering, circuit connections, and careful individual assembly."
+      ],
+      video: {
+        url: "assets/week6-video.mp4",
+        caption: "Soldering and assembling the individual electronics circuit"
+      },
+      photoGrid: [
+        {
+          img: "assets/week6-photo3.jpeg",
+          caption: "Individual soldering and assembly of the electronic components on the board"
+        },
+        {
+          img: "assets/week6-photo4.jpeg",
+          caption: "Completed individual electronics assembly with the required connections and battery"
+        }
+      ]
+    },
+
+    {
+      heading: 'Key Learnings',
+      paragraphs: [],
+      list: [
+        'Interpreting a challenge brief in the context of our own problem statement',
+        'Using survey and research data to guide product decisions rather than assumptions',
+        'Taking structured feedback from a mentor and applying it to refine our approach',
+        'Translating a problem statement into an initial UI/UX solution',
+        'Planning screens and user flow before creating a wireframe',
+        'Creating wireframes in Figma to represent layout and interaction flow',
+        'Fundamentals of Arduino-based development and microcontroller systems',
+        'Safe and correct use of a soldering machine',
+        'Independently placing, soldering, and connecting electronic components',
+        'Testing a completed circuit assembly with a battery'
+      ]
+    }
+
+  ],
+
+  reflection:
+    'Week 6 connected the research from the previous week to an actual solution. Going back to the challenge brief with real survey data made the problem statement feel more grounded, and the discussion with Charath Sir helped me see the gaps in our thinking that we couldn\u2019t catch on our own. Moving from that understanding into an initial UI/UX solution and wireframe in Figma showed me how research findings actually translate into screens and flows. The Arduino and soldering sessions were a nice shift back to hands-on hardware work, and doing the soldering and assembly individually rather than in a team pushed me to actually understand and complete every connection myself instead of relying on a teammate. Overall, this week combined problem-solving, design, and hardware skills in a single stretch of learning.'
+},
+
+7: {
+  title: 'Week 7',
+
+  entries: [
+
+    {
+      heading: 'Individual Sensor and Actuator Study',
+      paragraphs: [
+        'This week, we worked individually on a selected sensor and actuator and prepared a presentation based on their working principles and applications. I selected the LM35 temperature sensor as my sensor and the DC motor as my actuator.',
+
+        'The LM35 is a temperature sensor used to measure temperature and provide a corresponding electrical output. The DC motor is an actuator that converts electrical energy into mechanical motion and can be used where controlled rotational movement is required.',
+
+        'Through this activity, I gained a better understanding of how sensors collect information from the environment and how actuators respond to electrical control signals to produce physical movement. Preparing and presenting the topics also helped me understand the practical role of sensors and actuators in embedded systems.'
+      ],
+      photo: {
+        img: 'assets/week7-photo1.png',
+        caption: 'Presentation on the LM35 temperature sensor and DC motor actuator'
+      }
+    },
+
+    {
+      heading: 'Communication Protocols and Team Activity',
+      paragraphs: [
+        'We continued the Arduino-based learning sessions by exploring communication protocols used in embedded systems. We were introduced to concepts such as SPI, UART, and I\u00b2C, along with the importance of baud rate in serial communication. We learned that different communication protocols are used depending on the type of devices, number of connections, and communication requirements.',
+
+        'We then worked as a team of two on an ESP32-based hands-on activity involving an OLED display and joystick. We explored how the joystick could be used as an input device and how the OLED could be used to display information and graphical output.',
+
+        'As part of the activity, I developed a simple Pac-Man-style game on the OLED display using the ESP32 and joystick. We also displayed our team name on the OLED screen as part of the implementation.',
+
+        'This activity helped us connect the concepts of input, processing, and output in a practical embedded system. It also gave us experience in combining multiple components and developing an interactive application using the ESP32.'
+      ],
+      /* Row of two photos side by side, then the video renders full-width below them.
+         Replace the second image below with your actual reference game screenshot
+         (drop the file into your assets folder and update the "img" path). */
+      photoRow: [
+        {
+          img: 'assets/week7-photo2.jpeg',
+          caption: 'ESP32 + OLED display + joystick setup and working prototype'
+        },
+        {
+          img: 'assets/week7-photo3.jpeg',
+          caption: 'Reference game image used as inspiration for the Pac-Man style implementation'
+        }
+      ],
+      video: {
+        url: 'assets/week7-video.mp4',
+        caption: 'Pac-Man style game running on the OLED display via ESP32 and joystick'
+      }
+    },
+
+    {
+      heading: 'Revised Survey and Open-Ended User Research',
+      paragraphs: [
+        'After receiving guidance from our mentor, we reviewed the questions used in our earlier survey and made the necessary changes to improve the quality and relevance of the responses.',
+
+        'We added and modified questions based on the feedback and included open-ended questions to allow participants to express their opinions and experiences in their own words. We then conducted the revised survey again among students in our college.'
+      ]
+    },
+
+    {
+      heading: 'IoT & Connectivity — Deep Dive',
+      paragraphs: [
+        'This week also introduced us to IoT and connectivity through three hands-on tasks: turning an ESP32 LED on and off through a web server, using MQTT with Adafruit IO to control an LED and a 230V bulb through a relay from a live dashboard feed, and controlling an on/off switch by voice using IFTTT and Google Assistant.',
+
+        'Because this part of the week involves three separate tasks with their own setup and results, it has its own dedicated page with a full step-by-step breakdown of each task.'
+      ],
+      link: {
+        href: 'iot-journey.html',
+        label: 'Explore the IoT & Connectivity Deep Dive'
+      }
+    }
+
+  ]
 }
 };
 const TOTAL_WEEKS = 20;
@@ -629,35 +789,64 @@ function openWeekModal(week){
     <div class="modal-entry">
       <h4>${entry.heading}</h4>
       ${entry.paragraphs.map(p => `<p>${p}</p>`).join('')}
-      ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
-      ${entry.video ? `
-  <div class="week-video-wrap">
-    <video
-      controls
-      preload="metadata"
-      playsinline
-      class="week-local-video"
-      title="${entry.video.caption}">
-      <source src="${entry.video.url}" type="video/mp4">
-      Your browser does not support the video element.
-    </video>
+      ${entry.photoRow ? `
+  <div class="week-photo-grid">
+    ${entry.photoRow.map(p => `
+      <figure class="week-photo-grid-item">
+        <img src="${p.img}" alt="${p.caption}">
+        <figcaption class="week-photo-caption">${p.caption}</figcaption>
+      </figure>
+    `).join('')}
   </div>
-
-  <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:14px;">
-    ${entry.video.caption}
-  </figcaption>
-` : ''}
-      ${entry.photoGrid ? `
-        <div class="week-photo-grid">
-          ${entry.photoGrid.map(p => `
-            <figure class="week-photo-grid-item">
-              <img src="${p.img}" alt="${p.caption}">
-              <figcaption class="week-photo-caption">${p.caption}</figcaption>
-            </figure>
-          `).join('')}
-        </div>
+  ${entry.video ? `
+    <div class="week-video-wrap">
+      <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
+        <source src="${entry.video.url}" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+    </div>
+    <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:14px;">${entry.video.caption}</figcaption>
+  ` : ''}
+` : entry.photo && entry.video ? `
+  <div class="week-media-row">
+    <figure class="week-photo-figure week-media-row-item">
+      <img src="${entry.photo.img}" alt="${entry.photo.caption}">
+      <figcaption class="week-photo-caption">${entry.photo.caption}</figcaption>
+    </figure>
+    <div class="week-media-row-item">
+      <div class="week-video-wrap">
+        <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
+          <source src="${entry.video.url}" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+      </div>
+      <figcaption class="week-photo-caption" style="text-align:center;">${entry.video.caption}</figcaption>
+    </div>
+  </div>
+` : `
+  ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
+  ${entry.video ? `
+    <div class="week-video-wrap">
+      <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
+        <source src="${entry.video.url}" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+    </div>
+    <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:14px;">${entry.video.caption}</figcaption>
+  ` : ''}
+`}
+      ${entry.photoGrid ? ` 
+        <div class="week-photo-grid"> 
+          ${entry.photoGrid.map(p => ` 
+            <figure class="week-photo-grid-item"> 
+              <img src="${p.img}" alt="${p.caption}"> 
+              <figcaption class="week-photo-caption">${p.caption}</figcaption> 
+            </figure> 
+          `).join('')} 
+        </div> 
       ` : ''}
       ${entry.list ? `${entry.listLabel ? `<p style="font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:2px;">${entry.listLabel}</p>` : ''}<ul>${entry.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
+      ${entry.link ? `<a class="week-link-card" href="${entry.link.href}"><span>${entry.link.label}</span><span class="week-link-arrow">→</span></a>` : ''}
     </div>
   `).join('');
 

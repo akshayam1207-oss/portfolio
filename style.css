@@ -321,24 +321,6 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
     text-align:center;
 }
 
-.week-photo-figure img{
-    width:90%;
-    max-width:900px;
-    height:auto;
-    object-fit:cover;
-    background:transparent;
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);
-    display:block;
-    margin:0 auto;
-}
-
-@media (max-width:600px){
-    .week-photo-figure img{
-        width:100%;
-    }
-}
-
 .week-photo-caption{
     margin-top:12px;
     font-size:0.9rem;
@@ -346,7 +328,8 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
     font-style:italic;
 }
 
-/* Photo grid — used for entries with multiple images (e.g. Week 3, 2-per-row) */
+/* Photo grid — used for entries with multiple images (e.g. Week 3, 2-per-row),
+   AND for the Week 7 "photoRow" (two photos side by side before the video). */
 .week-photo-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -357,14 +340,6 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
     margin:0;
     text-align:center;
 }
-.week-photo-grid-item img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:14px;
-    box-shadow:0 8px 22px rgba(0,0,0,0.12);
-    display:block;
-}
 .week-photo-grid-item .week-photo-caption{
     margin-top:8px;
     font-size:0.8rem;
@@ -372,9 +347,6 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
 @media (max-width:600px){
     .week-photo-grid{
         grid-template-columns:1fr;
-    }
-    .week-photo-grid-item img{
-        height:auto;
     }
 }
 
@@ -400,15 +372,43 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
 .reflection-block{padding:22px 24px;border-radius:16px;background:var(--paper);border-left:3px solid var(--teal);}
 .reflection-label{font-family:var(--font-mono);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px;}
 
+/* Link-out card — used to send the reader to a dedicated sub-page (e.g. the IoT deep dive) */
+.week-link-card{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:18px 24px;
+  border-radius:16px;
+  background:linear-gradient(135deg, var(--blue), var(--teal));
+  color:#fff;
+  font-weight:600;
+  font-size:0.98rem;
+  box-shadow:0 10px 26px rgba(47,117,102,0.28);
+  transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.week-link-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(47,117,102,0.36);
+}
+.week-link-arrow{
+  font-size:1.1rem;
+  transition:transform 0.3s var(--ease);
+}
+.week-link-card:hover .week-link-arrow{
+  transform:translateX(5px);
+}
+
 /* ============================================
    MODAL
    ============================================ */
 .modal-overlay{position:fixed;inset:0;background:rgba(31,53,71,0.5);backdrop-filter:blur(6px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity 0.4s var(--ease), visibility 0.4s var(--ease);}
 .modal-overlay.open{opacity:1;visibility:visible;}
 .modal-box{background:var(--paper);border-radius:var(--radius-lg);max-width:640px;width:100%;max-height:82vh;overflow-y:auto;padding:44px;position:relative;transform:translateY(30px) scale(0.97);transition:transform 0.4s var(--ease), max-width 0.3s var(--ease);box-shadow:var(--shadow-lg);border:1px solid var(--line);}
-.modal-box.modal-wide{max-width:1080px;width:94vw;padding:60px;max-height:90vh;}
-@media (max-width:1100px){.modal-box.modal-wide{max-width:800px;width:94vw;padding:48px;}}
-@media (max-width:600px){.modal-box.modal-wide{padding:32px;max-height:92vh;}}
+.modal-box.modal-wide{max-width:1220px;width:96vw;padding:56px;max-height:90vh;}
+@media (max-width:1300px){.modal-box.modal-wide{max-width:920px;width:95vw;padding:48px;}}
+@media (max-width:600px){.modal-box.modal-wide{padding:28px;max-height:92vh;width:96vw;}}
 .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
 .modal-close{position:absolute;top:24px;right:24px;width:38px;height:38px;border-radius:50%;background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--ink-soft);transition:all 0.3s var(--ease);}
 .modal-close:hover{background:var(--teal);color:#fff;transform:rotate(90deg);}
@@ -486,46 +486,152 @@ footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);backgro
   .week-node{left:-44px;}
 }
 @media (max-width:480px){.container{padding:0 20px;}.hero-avatar{width:120px;height:120px;font-size:2.3rem;}}
-/* ---------- Week 4 Media Fix ---------- */
 
-.week-photo-grid-item {
-  overflow: hidden;
+/* ============================================
+   PHOTO FRAMING — consistent, clean boxes for every
+   week photo/grid image regardless of its original
+   aspect ratio.
+   ============================================ */
+.week-photo-figure img{
+  width:auto;
+  max-width:100%;
+  max-height:420px;
+  object-fit:contain;
+  object-position:center;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  box-sizing:border-box;
+  box-shadow:0 10px 30px rgba(0,0,0,0.10);
+  display:block;
+  margin:0 auto;
+}
+@media (max-width:600px){
+  .week-photo-figure img{aspect-ratio:4/3;padding:12px;}
 }
 
-.week-photo-grid-item img {
-  width: 100%;
-  height: 280px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background: #f7f9f8;
+.week-photo-grid-item img{
+  width:auto;
+  max-width:100%;
+  max-height:420px;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  object-position:center;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  box-sizing:border-box;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+  display:block;
 }
 
-.week-photo-figure img {
-  width: 100%;
-  max-height: 420px;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  display: block;
+/* Local MP4 video — used standalone AND below a photoRow (Week 7 pattern) */
+.week-video-wrap{
+  width:100%;
+  max-width:900px;
+  margin:20px auto 8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  border-radius:18px;
+  background:#111;
+}
+.week-local-video{
+  width:100%;
+  max-height:520px;
+  height:auto;
+  display:block;
+  object-fit:contain;
 }
 
-/* Local MP4 video */
-.week-video-wrap {
-  width: 100%;
-  margin: 20px 0 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #111;
+/* ============================================
+   MEDIA ROW — legacy photo + video side-by-side layout.
+   Kept for any future entry that sets BOTH entry.photo
+   and entry.video together (without photoRow). Not used
+   by Week 7 anymore, since that now uses photoRow + a
+   video below (see the .week-photo-grid + .week-video-wrap
+   rules above).
+   ============================================ */
+
+.week-media-row{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:20px;
+  margin:20px 0;
+  align-items:stretch;
 }
 
-.week-local-video {
-  width: 100%;
-  max-height: 520px;
-  height: auto;
-  display: block;
-  object-fit: contain;
+.week-media-row-item{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.week-media-row-item .week-photo-figure{
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.week-media-row-item .week-photo-figure img{
+  width:100%;
+  height:340px;
+  object-fit:contain;
+  object-position:center;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  box-sizing:border-box;
+  box-shadow:0 10px 30px rgba(0,0,0,0.10);
+}
+
+.week-media-row-item .week-video-wrap{
+  width:100%;
+  height:340px;
+  padding:18px;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.10);
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.week-media-row-item .week-local-video{
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  border-radius:10px;
+  background:#111;
+  display:block;
+}
+
+.week-media-row-item .week-photo-caption{
+  margin-top:12px;
+  text-align:center;
+}
+
+@media (max-width:700px){
+  .week-media-row{
+    grid-template-columns:1fr;
+  }
+  .week-media-row-item .week-photo-figure img,
+  .week-media-row-item .week-video-wrap{
+    height:auto;
+    max-height:340px;
+  }
+  .week-media-row-item .week-local-video{
+    max-height:300px;
+  }
 }
