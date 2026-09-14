@@ -34,8 +34,9 @@
   <div class="sec-blob mist" style="width:460px;height:460px;bottom:-140px;right:-130px;animation-delay:-3s;"></div>
   <div class="container">
 
-    <a href="protosem.html" class="week-link-card" style="max-width:260px;margin:0 0 40px;background:var(--paper);color:var(--teal-deep);box-shadow:var(--shadow-sm);">
-      <span>← Back to ProtoSem Journey</span>
+    <!-- Now links back to Week 7's modal on protosem.html, not the top of the page -->
+    <a href="protosem.html?week=7" class="week-link-card" style="max-width:260px;margin:0 0 40px;background:var(--paper);color:var(--teal-deep);box-shadow:var(--shadow-sm);">
+      <span>← Back to Week 7</span>
     </a>
 
     <div class="protosem-hero reveal">
@@ -44,42 +45,291 @@
       <p class="section-sub" style="margin-left:auto;margin-right:auto;">A step-by-step look at the three IoT tasks from Week 7: an ESP32 web-server LED, an MQTT/Adafruit IO dashboard controlling an LED and a relay-switched 230V bulb, and voice control through IFTTT and Google Assistant.</p>
     </div>
 
+    <!-- Quick task navigation — jumps straight to a task -->
+    <div class="protosem-stats reveal" style="margin-bottom:40px;">
+      <a href="#task1" class="protosem-stat" style="cursor:pointer;">Task 1 · ESP32 Web Server</a>
+      <a href="#task2" class="protosem-stat" style="cursor:pointer;">Task 2 · MQTT + Adafruit IO</a>
+      <a href="#task3" class="protosem-stat" style="cursor:pointer;">Task 3 · Voice Control</a>
+    </div>
+
     <!-- ============================================
          TASK 1 — ESP32 LED ON/OFF VIA WEB SERVER
-         Fill in: paragraphs describing setup, code approach,
-         wiring, and the result. Add photos/video the same
-         way protosem.html does (see week-photo-figure /
-         week-photo-grid / week-video-wrap classes below).
          ============================================ -->
-    <div class="card-cool" style="padding:40px 36px;margin-bottom:32px;">
+    <div class="card-cool" id="task1" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 1</span>
       <h3 class="modal-title" style="margin-top:12px;">ESP32 LED On/Off via Web Server</h3>
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;">
-        Content coming soon — steps, code, and results for controlling an ESP32 LED through a locally hosted web server will go here.
+
+      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
+        The goal of this task was to turn the ESP32 into its own tiny web server — no app, no external platform — so that visiting its IP address in a browser would show a simple control page with ON and OFF buttons that switch an LED connected to the board.
+      </p>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Writing the sketch and connecting to Wi-Fi</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I wrote an Arduino sketch that connects the ESP32 to the lab Wi-Fi, starts a lightweight web server on it, and defines two routes — <code>/on</code> and <code>/off</code> — each of which sets the LED pin state and sends back the updated control page as the response. Once uploaded, the Serial Monitor confirmed the board had connected to Wi-Fi, been assigned an IP address, and started the server successfully.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task1-photo1.jpeg" alt="Arduino sketch for LED OFF handler and Serial Monitor confirming Wi-Fi connection and web server start">
+        <figcaption class="week-photo-caption">Arduino IDE sketch (LED OFF handler) and Serial Monitor confirming Wi-Fi connection, assigned IP address, and the web server starting successfully</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Testing the control page in the browser</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        With the board's IP address in hand, I opened it in a browser and got a clean "ESP32 LED Control" page with ON and OFF buttons and a live status indicator. Clicking ON sent a GET request to <code>/on</code>, which the DevTools Network tab confirmed came back with a <strong>200 OK</strong> response — the ESP32 had received the request, switched the LED, and served the updated page back. Clicking OFF worked the same way through the <code>/off</code> route.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task1-photo2.jpeg" alt="Browser showing LED Status ON with a 200 OK network response for the /on request">
+          <figcaption class="week-photo-caption">LED Status: ON — the /on request returns a 200 OK response in the Network tab</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task1-photo3.jpeg" alt="Browser showing LED Status OFF after the /off request">
+          <figcaption class="week-photo-caption">LED Status: OFF — the page updates instantly after the /off request</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Verifying it on the actual hardware</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        The last step was confirming the browser control was actually driving the physical board and not just updating a webpage. Pressing ON on the page lit up the ESP32's onboard LED in real time, and pressing OFF turned it off immediately — confirming the full loop from browser click → HTTP request → ESP32 → physical LED was working end to end.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task1-photo4.jpeg" alt="Physical ESP32 board with LED lit, browser control page showing ON pressed">
+          <figcaption class="week-photo-caption">ON pressed on the web page — the ESP32's onboard LED lights up in real time</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task1-photo5.jpeg" alt="Physical ESP32 board with LED off, browser control page showing OFF pressed">
+          <figcaption class="week-photo-caption">OFF pressed on the web page — the LED switches off immediately</figcaption>
+        </figure>
+      </div>
+
+      <div class="week-video-wrap">
+        <video controls preload="metadata" playsinline class="week-local-video" title="Full demo of the ESP32 LED web server working end to end">
+          <source src="assets/task1-video.mp4" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+      </div>
+      <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:6px;">Full demo — controlling the ESP32's LED live from the web server page</figcaption>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
+        <strong>Result:</strong> a working Wi-Fi web server hosted entirely on the ESP32 itself, controlling a physical LED through a clean browser interface with no external app or cloud service involved.
       </p>
     </div>
 
     <!-- ============================================
          TASK 2 — MQTT / ADAFRUIT IO DASHBOARD
-         LED + 230V bulb via relay, controlled from a
-         live Adafruit IO dashboard feed.
          ============================================ -->
-    <div class="card-cool" style="padding:40px 36px;margin-bottom:32px;">
+    <div class="card-cool" id="task2" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 2</span>
       <h3 class="modal-title" style="margin-top:12px;">MQTT + Adafruit IO — LED & Relay-Controlled 230V Bulb</h3>
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;">
-        Content coming soon — steps, dashboard feed setup, relay wiring, and results for controlling an LED and a 230V bulb through MQTT and Adafruit IO will go here.
+
+      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
+        This task went a step further than Task 1: instead of a page hosted locally on the ESP32, the ESP32 would connect over MQTT to <strong>Adafruit IO</strong>, so the device could be switched on and off from a live dashboard from anywhere, and would eventually control a real 230V bulb through a relay rather than a small onboard LED.
+      </p>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Setting up Adafruit IO and creating a feed</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I created an Adafruit IO account and set up a new feed named <strong>LED</strong>, which acts as the channel the ESP32 publishes to and subscribes from over MQTT. Every time the LED's state changed, the feed recorded a new data point — the feed history shows over 150 recorded values, confirming the ESP32 was talking to Adafruit IO reliably.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo1.jpeg" alt="Adafruit IO Feeds page showing the newly created LED feed">
+          <figcaption class="week-photo-caption">Creating the LED feed on Adafruit IO</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo2.jpeg" alt="Adafruit IO feed history graph showing over 150 recorded on/off data points">
+          <figcaption class="week-photo-caption">Feed history — over 150 on/off data points recorded from the ESP32</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Building the dashboard control</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        Next, I built a dashboard block on top of the LED feed — a toggle switch labelled "Toggle It!!" that sends a value of <code>1</code> when switched ON and <code>0</code> when switched OFF. This gave me a live, always-available control panel: flipping the toggle publishes a new value to the feed instantly, which the ESP32 picks up over MQTT.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo3.jpeg" alt="Configuring the Toggle It dashboard block with On/Off text and values">
+          <figcaption class="week-photo-caption">Configuring the toggle block — On value 1, Off value 0</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo4.jpeg" alt="Live Adafruit IO dashboard titled Home automation with the toggle switch">
+          <figcaption class="week-photo-caption">The finished live dashboard — "Home automation!!!" with the toggle switch</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Moving from an LED to a real 230V bulb via relay</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        Once the dashboard was reliably switching the LED, I moved to the actual objective — controlling a real 230V bulb through a relay module, since the ESP32 can't switch mains voltage directly. This meant opening up a bulb holder, soldering the live and neutral wires to the relay's switching terminals, and wiring the relay's control pins to the ESP32.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task2-photo5.jpeg" alt="Soldering the bulb holder wires onto the relay module terminals">
+        <figcaption class="week-photo-caption">Soldering the bulb holder's live and neutral wires onto the relay module</figcaption>
+      </figure>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        On the software side, I wrote a <code>handleRelay()</code> function that reads the incoming value from the Adafruit IO feed and drives the relay pin accordingly — writing it HIGH to turn the relay (and bulb) ON when the feed value is <code>1</code>, and LOW to turn it OFF otherwise, with Serial print statements logging every state change for debugging.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task2-photo6.jpeg" alt="Arduino IDE code for the handleRelay function compiling">
+        <figcaption class="week-photo-caption">handleRelay() function — reading the Adafruit IO feed value and switching the relay pin accordingly</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — The mistake: a loose connection, and having to redo it</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        When I first connected everything — ESP32, relay, and bulb holder — the toggle on the dashboard wasn't reliably switching the bulb. After checking the code and confirming the Adafruit IO values were arriving correctly on the Serial Monitor, I traced the problem back to the hardware: one of my soldered joints on the relay wasn't making a proper connection, so the relay was only intermittently receiving power from the wiring.
+      </p>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I had to desolder and redo that connection — cleaning the joint, re-tinning the wire, and soldering it again more carefully this time, making sure it was mechanically secure before covering it with hot glue for insulation and strain relief.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo7.jpeg" alt="Initial ESP32, relay, and bulb wiring setup where the connection was unreliable">
+          <figcaption class="week-photo-caption">The initial wiring — this was where the loose joint was causing the unreliable switching</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo8.jpeg" alt="Re-soldering the relay connection to fix the loose joint">
+          <figcaption class="week-photo-caption">Re-soldering the joint — cleaning, re-tinning, and securing the connection properly</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Success: the bulb responding correctly to the dashboard</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        After fixing the connection, the Serial Monitor showed clean, consistent logs every time the dashboard toggle was flipped — <code>Adafruit IO value: 1 → Relay ON → Bulb ON</code> and <code>Adafruit IO value: 0 → Relay OFF → Bulb OFF</code> — and the bulb itself switched reliably in real time from the live dashboard, exactly as intended.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo9.jpeg" alt="Final working setup with the bulb lit and clean Serial Monitor logs showing correct relay switching">
+          <figcaption class="week-photo-caption">Bulb lit and Serial Monitor showing clean Relay ON / Bulb ON logs after the fix</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo10.jpeg" alt="Close-up of the final ESP32, relay, and bulb setup working correctly">
+          <figcaption class="week-photo-caption">The final ESP32 + relay + bulb setup, fully functional</figcaption>
+        </figure>
+      </div>
+
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task2-photo11.jpeg" alt="Working on the ESP32 and Adafruit IO setup during the lab session">
+        <figcaption class="week-photo-caption">Working through the setup and debugging live during the lab session</figcaption>
+      </figure>
+
+      <div class="week-photo-grid" style="margin-bottom:6px;">
+        <div>
+          <div class="week-video-wrap">
+            <video controls preload="metadata" playsinline class="week-local-video" title="Adafruit IO dashboard controlling the relay and bulb — demo 1">
+              <source src="assets/task2-video1.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+          </div>
+          <figcaption class="week-photo-caption" style="text-align:center;">Dashboard toggle switching the relay-controlled bulb ON and OFF</figcaption>
+        </div>
+        <div>
+          <div class="week-video-wrap">
+            <video controls preload="metadata" playsinline class="week-local-video" title="Adafruit IO dashboard controlling the relay and bulb — demo 2">
+              <source src="assets/task2-video2.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+          </div>
+          <figcaption class="week-photo-caption" style="text-align:center;">Final confirmation — the bulb responding correctly to every toggle</figcaption>
+        </div>
+      </div>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
+        <strong>Result:</strong> a real 230V bulb controlled reliably over MQTT from a live Adafruit IO dashboard, through a relay driven by the ESP32 — and a hardware debugging lesson along the way: when software logic looks correct but behaviour is inconsistent, the problem is often a physical connection, not the code.
       </p>
     </div>
 
     <!-- ============================================
          TASK 3 — VOICE CONTROL VIA IFTTT + GOOGLE ASSISTANT
          ============================================ -->
-    <div class="card-cool" style="padding:40px 36px;margin-bottom:32px;">
+    <div class="card-cool" id="task3" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 3</span>
       <h3 class="modal-title" style="margin-top:12px;">Voice Control On/Off — IFTTT & Google Assistant</h3>
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;">
-        Content coming soon — steps, IFTTT applet setup, and results for voice-controlled on/off switching using Google Assistant will go here.
+
+      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
+        The goal of this task was to control the same relay-switched 230V bulb from Task 2 using nothing but voice — saying a phrase to Google Assistant instead of tapping a toggle on a dashboard. <strong>IFTTT</strong> (If This Then That) was the bridge that connected a spoken Google Assistant command to the Adafruit IO feed the ESP32 was already listening to.
+      </p>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Starting a new applet and choosing Google Assistant as the trigger</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        On IFTTT, I created a new applet using the classic "If This → Then That" format. For the "If This" trigger service, I searched for and selected <strong>Google Assistant</strong>, which lets a spoken phrase to the Assistant kick off an automation.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo1.jpeg" alt="IFTTT Create page showing the If This and Then That blocks">
+          <figcaption class="week-photo-caption">Starting a new applet on IFTTT — the If This / Then That structure</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo2.jpeg" alt="IFTTT Choose a trigger page with Google Assistant selected">
+          <figcaption class="week-photo-caption">Selecting Google Assistant as the trigger service</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Setting up the "lights on" and "lights off" voice phrases</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        For the trigger type, I chose <strong>"Activate scene,"</strong> which fires whenever I say "Ok Google, activate [scene name]." Since I needed two separate voice commands — one to turn the bulb on and one to turn it off — I set up two applets in parallel: one with the scene name <strong>"lights on"</strong> and another with the scene name <strong>"lights off."</strong>
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo3.jpeg" alt="IFTTT Complete trigger fields with scene name set to lights on">
+          <figcaption class="week-photo-caption">Trigger fields for the "lights on" scene</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo4.jpeg" alt="IFTTT Edit trigger fields with scene name set to lights off">
+          <figcaption class="week-photo-caption">Trigger fields for the "lights off" scene</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Connecting each trigger to the Adafruit IO LED feed</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        For "Then That," I chose <strong>Adafruit IO</strong> as the action service and selected "Send data to Adafruit IO," pointing both applets at the same <strong>LED</strong> feed the ESP32 was already subscribed to from Task 2. The "lights on" applet was configured to send a value of <code>1</code> to the feed, and the "lights off" applet was configured to send a value of <code>0</code> — reusing the exact same feed and value logic as the dashboard toggle, just triggered by voice instead of a tap.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo5.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights on, then send data to LED feed">
+          <figcaption class="week-photo-caption">Completed applet — "Okay Google, activate lights on" → Send data to LED feed</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo6.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights off, then send data to LED feed">
+          <figcaption class="week-photo-caption">Completed applet — "Okay Google, activate lights off" → Send data to LED feed</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — Reusing the Task 2 relay hardware and ESP32 code</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        No new wiring was needed here — the same ESP32, relay module, and 230V bulb setup from Task 2 was reused as-is, since the ESP32 was already listening to the LED feed over MQTT using the Adafruit IO library, its Wi-Fi credentials and Adafruit IO username/key defined right at the top of the sketch. Whatever wrote to that feed — a dashboard toggle or an IFTTT applet triggered by voice — the ESP32 couldn't tell the difference, and the same <code>handleRelay()</code> logic from Task 2 switched the relay exactly the same way.
+      </p>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        The Serial Monitor confirmed this clearly: every time an IFTTT applet fired, the feed value changed and the ESP32 logged it instantly — <code>Adafruit IO value: 1 → Relay ON → Bulb ON</code> when "lights on" was triggered, and <code>Adafruit IO value: 0 → Relay OFF → Bulb OFF</code> when "lights off" was triggered.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo7.jpeg" alt="Arduino IDE with AdafruitIO_WiFi code and Serial Monitor showing relay and bulb state changes, bulb lit next to the laptop">
+          <figcaption class="week-photo-caption">Serial Monitor confirming the feed value switching the relay and bulb correctly</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task3-photo8.jpeg" alt="Close-up of the ESP32, relay module, and 230V bulb setup reused from Task 2">
+          <figcaption class="week-photo-caption">The same ESP32 + relay + bulb setup from Task 2, now controlled by voice</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Testing the full voice control loop</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        With everything connected, I tested the complete loop using Google Assistant on a phone. Saying <strong>"Ok Google, activate lights on"</strong> triggered the IFTTT applet, which sent a value of 1 to the Adafruit IO feed, which the ESP32 picked up and used to switch the relay — turning the bulb on within a second or two. Saying <strong>"Ok Google, activate lights off"</strong> completed the reverse path and switched the bulb off, with no dashboard, button, or physical switch involved at any point.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task3-photo9.jpeg" alt="Testing the voice command to Google Assistant on a phone with the bulb on the desk">
+        <figcaption class="week-photo-caption">Speaking the "Ok Google, activate lights on / lights off" command and watching the bulb respond</figcaption>
+      </figure>
+
+      <div class="week-video-wrap">
+        <video controls preload="metadata" playsinline class="week-local-video" title="Full demo of voice-controlled bulb using Google Assistant and IFTTT">
+          <source src="assets/task3-video.mp4" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+      </div>
+      <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:6px;">Full demo — turning the bulb on and off with "Ok Google, activate lights on / lights off"</figcaption>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
+        <strong>Result:</strong> a bulb controlled entirely by voice, through the full chain of spoken command → Google Assistant → IFTTT applet → Adafruit IO feed → ESP32 → relay → bulb — reaching the same physical outcome as Task 2's dashboard toggle, but through a completely different, hands-free trigger path.
       </p>
     </div>
 
@@ -96,5 +346,20 @@
 <button id="back-to-top" aria-label="Back to top">↑</button>
 
 <script src="script.js"></script>
+<script>
+/* Guaranteed back-to-top behavior for this page, independent of script.js,
+   since this page is long and needs the button to reliably show/scroll. */
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 400){ btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>

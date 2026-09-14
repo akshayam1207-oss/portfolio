@@ -605,11 +605,11 @@ const protosemData = {
       photoGrid: [
         {
           img: "assets/week6-photo1.jpeg",
-          caption: "Developing the initial UI/UX solution based on the identified user needs"
+          caption: "Initial hand-drawn wireframes developed to plan the finance management and tracking system interface"
         },
         {
           img: "assets/week6-photo2.jpeg",
-          caption: "Creating the solution wireframe and user flow in Figma"
+          caption: "Creating the site map and user flow to organize the structure of the finance management and tracking system"
         }
       ]
     },
@@ -634,16 +634,16 @@ const protosemData = {
       ],
       video: {
         url: "assets/week6-video.mp4",
-        caption: "Soldering and assembling the individual electronics circuit"
+        caption: "Soldering and assembling the electronic circuit"
       },
       photoGrid: [
         {
           img: "assets/week6-photo3.jpeg",
-          caption: "Individual soldering and assembly of the electronic components on the board"
+          caption: "Soldering the electronic components and making the required circuit connections"
         },
         {
           img: "assets/week6-photo4.jpeg",
-          caption: "Completed individual electronics assembly with the required connections and battery"
+          caption: "Completed electronics assembly with the required connections and battery"
         }
       ]
     },
@@ -702,17 +702,15 @@ const protosemData = {
 
         'This activity helped us connect the concepts of input, processing, and output in a practical embedded system. It also gave us experience in combining multiple components and developing an interactive application using the ESP32.'
       ],
-      /* Row of two photos side by side, then the video renders full-width below them.
-         Replace the second image below with your actual reference game screenshot
-         (drop the file into your assets folder and update the "img" path). */
+      /* Row of two photos side by side, then the video renders full-width below them. */
       photoRow: [
         {
           img: 'assets/week7-photo2.jpeg',
-          caption: 'ESP32 + OLED display + joystick setup and working prototype'
+          caption: 'ESP32 and OLED display setup for displaying the team name and system output'
         },
         {
-          img: 'assets/week7-photo3.jpeg',
-          caption: 'Reference game image used as inspiration for the Pac-Man style implementation'
+          img: 'assets/week7-photo3.png',
+          caption: 'ESP32-based Pac-Man game displayed on the OLED using joystick control'
         }
       ],
       video: {
@@ -746,6 +744,7 @@ const protosemData = {
   ]
 }
 };
+
 const TOTAL_WEEKS = 20;
 const weekRail = document.getElementById('weekRail');
 
@@ -865,6 +864,25 @@ function openWeekModal(week){
     ${reflectionHtml}
   `, true);
 }
+
+/* Deep-link support: opening protosem.html?week=7 (or any week number)
+   automatically opens that week's modal on page load — this is what makes
+   the "Back to Week 7" link on iot-journey.html jump straight back in.
+
+   IMPORTANT: this has to wait for DOMContentLoaded. script.js sets up
+   window.openModal inside its own DOMContentLoaded listener, and that
+   listener is registered before this one (script.js loads first), so by
+   the time this runs, window.openModal is guaranteed to exist. Calling
+   openWeekModal() immediately (outside DOMContentLoaded) was the bug —
+   window.openModal wasn't defined yet, so the modal silently failed to
+   open and the visitor just landed on the plain page. */
+document.addEventListener('DOMContentLoaded', function(){
+  const params = new URLSearchParams(window.location.search);
+  const w = params.get('week');
+  if(w !== null && !isNaN(parseInt(w, 10))){
+    openWeekModal(parseInt(w, 10));
+  }
+});
 </script>
 </body>
 </html>
