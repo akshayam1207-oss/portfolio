@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firebase Dashboard Project — Akshaya M</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><div class="loader-mark">Akshaya M</div></div>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>Akshaya M</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="protosem.html" class="active">ProtoSem Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section id="protosem" class="page-hero-space">
+  <div class="sec-blob teal" style="width:540px;height:540px;top:-160px;left:-170px;animation-delay:-9s;"></div>
+  <div class="sec-blob mist" style="width:460px;height:460px;bottom:-140px;right:-130px;animation-delay:-3s;"></div>
+  <div class="container">
+
+    <a href="protosem.html?week=7" class="week-link-card" style="max-width:260px;margin:0 0 40px;background:var(--paper);color:var(--teal-deep);box-shadow:var(--shadow-sm);">
+      <span>← Back to Week 7</span>
+    </a>
+
+    <div class="protosem-hero reveal">
+      <span class="eyebrow">Week 7 · Firebase Integration</span>
+      <h2 class="section-title">Firebase-Connected Smart IoT Dashboard</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Building on the IoT tasks above, I built a hosted, login-protected Firebase dashboard for the same ESP32 setup — one task to stand up the Firebase project itself, and one to get the ESP32's real sensor data and bulb control actually flowing into it live.</p>
+    </div>
+
+    <!-- Quick task navigation -->
+    <div class="protosem-stats reveal" style="margin-bottom:40px;">
+      <a href="#task4" class="protosem-stat" style="cursor:pointer;">Task 4 · Firebase Dashboard Setup</a>
+      <a href="#task5" class="protosem-stat" style="cursor:pointer;">Task 5 · ESP32 Integration</a>
+    </div>
+
+    <!-- ============================================
+         TASK 4 — CREATING & DEPLOYING THE FIREBASE DASHBOARD
+         ============================================ -->
+    <div class="card-cool" id="task4" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
+      <span class="modal-week">Task 4</span>
+      <h3 class="modal-title" style="margin-top:12px;">Creating & Deploying the Firebase Dashboard (with Login)</h3>
+
+      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
+        The goal of this task was to stand up a complete Firebase-backed web app — hosting, a login screen, and a database to hold live sensor data — before wiring up any hardware at all. I wanted the dashboard itself fully working and deployed first, so Task 5 could focus purely on getting real data flowing into it.
+      </p>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Creating the Firebase project</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I started in the Firebase console and created a brand new project, naming it <strong>Smart IoT Monitoring</strong>. This project became the home for everything else in this task — Hosting, Authentication, and the Realtime Database all live under it.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo1.png" alt="Firebase console home page showing the newly created Smart IoT Monitoring project">
+        <figcaption class="week-photo-caption">The Smart IoT Monitoring project created in the Firebase console</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Registering a web app and getting the Firebase config</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        Next, I registered a web app inside the project, which gave me a Firebase configuration snippet — <code>apiKey</code>, <code>authDomain</code>, <code>projectId</code>, <code>storageBucket</code>, <code>messagingSenderId</code> and <code>appId</code>. This is the key that lets both the web dashboard and, later, the ESP32 firmware talk to this specific Firebase project.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo2.png" alt="Firebase web app configuration snippet with apiKey, authDomain, projectId and other config values">
+        <figcaption class="week-photo-caption">The Firebase config snippet generated after registering the web app</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Setting up the local Firebase CLI</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        On my machine, I checked my Node.js and npm versions, then installed the Firebase CLI globally with <code>npm install -g firebase-tools</code>. Once installed, I confirmed the version with <code>firebase --version</code> and logged into my Firebase account with <code>firebase login</code>.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo3.png" alt="Command prompt showing node -v, npm -v, npm install -g firebase-tools, firebase --version and firebase login">
+        <figcaption class="week-photo-caption">Installing the Firebase CLI and logging in from the terminal</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — Setting up the project folder and initializing Hosting</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I confirmed the project existed from the CLI's point of view with <code>firebase projects:list</code>, then created a dedicated folder for the hosting files — <code>Smart-IoT-Monitoring</code> inside my Desktop — and ran <code>firebase init hosting</code> from inside it. I linked it to the existing <strong>Smart IoT Monitoring</strong> project, set <code>public</code> as the hosting directory, and declined the single-page-app rewrite and GitHub Actions options since I didn't need them.
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task4-photo4.png" alt="Terminal running firebase projects:list and navigating folders to find the project directory">
+          <figcaption class="week-photo-caption">Listing my Firebase projects and navigating to the working folder</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task4-photo5.png" alt="Terminal running mkdir Smart-IoT-Monitoring and firebase init hosting, linking to the existing project">
+          <figcaption class="week-photo-caption">Creating the project folder and running firebase init hosting</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Deploying to Firebase Hosting</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        After testing the hosting files locally, I deployed everything with <code>firebase deploy</code>. The CLI uploaded the files, finalized a new hosting version, and released it — giving me a live Hosting URL for the dashboard.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo6.png" alt="Terminal log ending with Deploy complete and the live Firebase Hosting URL">
+        <figcaption class="week-photo-caption">firebase deploy completing successfully, with the live Hosting URL printed at the end</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 6 — Setting up Authentication (login) and the Realtime Database</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        For the login screen, I set up Firebase Authentication with email/password sign-in and added the user accounts allowed to access the dashboard. For the data side, I set up the Realtime Database with a structure to hold everything the dashboard would need: <code>current</code> (live sensor readings), <code>history</code> (logged readings over time), <code>sensors</code>, and <code>settings</code> (like the automatic-mode threshold).
+      </p>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task4-photo7.png" alt="Firebase Authentication Users page showing the registered accounts">
+          <figcaption class="week-photo-caption">Firebase Authentication — the user accounts allowed to log in to the dashboard</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task4-photo8.png" alt="Firebase Realtime Database showing the current, history, sensors and settings nodes">
+          <figcaption class="week-photo-caption">Realtime Database structure — current, history, sensors and settings</figcaption>
+        </figure>
+      </div>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 7 — The deployed login page</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        With everything deployed, visiting the live Hosting URL now showed a proper login screen for <strong>Smart IoT Monitoring</strong>, requiring an email and password before anyone could see the dashboard behind it.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo9.png" alt="The deployed Smart IoT Monitoring login page with email and password fields">
+        <figcaption class="week-photo-caption">The live, deployed login page for the dashboard</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 8 — The dashboard shell, ready for real data</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        After logging in, the dashboard itself was ready — Temperature, Humidity, Ambient Light and Bulb Status cards, an Appliance Control panel for manual/automatic bulb control, and a System Status panel. At this point it was still waiting on real hardware: the values all showed as placeholders, since no ESP32 was sending data yet. That's exactly where Task 5 picks up.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task4-photo10.png" alt="The IoT Dashboard UI with placeholder values, before any real sensor data was connected">
+        <figcaption class="week-photo-caption">The finished dashboard shell — structurally complete, but not yet receiving real sensor data</figcaption>
+      </figure>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
+        <strong>Result:</strong> a fully deployed, login-protected Firebase web app — Hosting, Authentication, and a Realtime Database — live at its own URL and ready to display and control real sensor data as soon as a device starts sending it.
+      </p>
+    </div>
+
+    <!-- ============================================
+         TASK 5 — ESP32 INTEGRATION
+         ============================================ -->
+    <div class="card-cool" id="task5" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
+      <span class="modal-week">Task 5</span>
+      <h3 class="modal-title" style="margin-top:12px;">ESP32 Integration — Real Sensor Data & Bulb Control on the Dashboard</h3>
+
+      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
+        With the Firebase dashboard live from Task 4, this task was about wiring up the actual hardware and writing the ESP32 firmware so that real sensor readings — and real bulb control — flow into that dashboard live, in both directions.
+      </p>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Wiring up the components</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I wired everything together on a breadboard around an <strong>ESP32 DevKit V4</strong>: a <strong>DHT11</strong> sensor for temperature and humidity, an <strong>LDR module</strong> for ambient light, and an <strong>SRD-05VDC relay module</strong> switching a 60W bulb through its normally-open contact from the 230V wall outlet. The ESP32 reads the two sensors, drives the relay, and talks to the Firebase Realtime Database roughly every couple of seconds.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo1.jpeg" alt="Physical wiring of the ESP32, DHT11, LDR module, relay, and bulb on a breadboard next to a laptop">
+        <figcaption class="week-photo-caption">The physical setup — ESP32, DHT11, LDR module, relay, and the bulb wired together</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Writing the firmware: Wi-Fi and Firebase credentials</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        In Arduino IDE, I wrote the ESP32 sketch and set up the credentials it needed at the top: the Wi-Fi SSID and password, the Firebase Web <strong>API key</strong>, the Realtime <strong>Database URL</strong>, and the email/password of the Firebase Authentication user the board signs in as before it's allowed to read or write any data.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo2.png" alt="Arduino IDE code showing WiFi SSID and password, Firebase API key, database URL, and user email and password">
+        <figcaption class="week-photo-caption">Wi-Fi and Firebase credentials — API key, database URL, and the sign-in user — defined at the top of the sketch</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Pin configuration, Firebase objects, and testing on the Serial Monitor</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        I mapped out the pins for the LDR, relay, and DHT11, created the Firebase data/auth/config objects, and used the Serial Monitor to confirm the board was reading real values and preparing each payload correctly — LDR reading, temperature, humidity, current mode, and bulb state — before trusting it to actually send anything.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo3.png" alt="Arduino IDE showing pin definitions and Firebase objects, with the Serial Monitor logging LDR, temperature, humidity, mode and bulb state">
+        <figcaption class="week-photo-caption">Pin configuration and Firebase objects, with the Serial Monitor confirming each reading before it's sent</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — From the breadboard to the live browser dashboard</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        With the firmware from Step 3 uploaded and confirmed on the Serial Monitor, the next check was to see the whole pipeline working together in one place — the wired ESP32 setup right next to the live dashboard, both running at the same time. What's actually happening here is that the ESP32 on the breadboard is reading its sensors and writing straight into the Firebase Realtime Database, while the dashboard open on the laptop is reading from that exact same database — so any change on the hardware side shows up on the browser within a second or two, with no manual refresh needed.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo6.jpeg" alt="The wired ESP32, DHT11, LDR and relay setup on a breadboard next to a laptop showing the live Smart IoT dashboard">
+        <figcaption class="week-photo-caption">The full pipeline running together — the wired ESP32 setup and the live web dashboard reading from the same database</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        Once live values were showing up, I spent time watching the dashboard's Historical Data table specifically, rather than just the "current" readings on the main screen. Seeing new rows appear on their own as the temperature, humidity, and LDR values updated was what actually confirmed the full logging path — ESP32 → Firebase → the dashboard's history view — was working end to end, not just the live snapshot.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo7.jpeg" alt="Working at the FORGE session, checking the Historical Data table on the laptop as new sensor readings log in live">
+        <figcaption class="week-photo-caption">Checking the Historical Data table live during the session, confirming new readings were logging correctly</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Manual control and Automatic mode driven by the LDR sensor</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        The Appliance Control panel gives two ways to run the bulb. In <strong>Manual</strong> mode, the Bulb ON and Bulb OFF buttons switch the relay directly from the browser, regardless of how bright or dark it is. In <strong>Automatic</strong> mode, the firmware instead compares the live reading from the <strong>LDR (Light Dependent Resistor) module</strong> — the same ambient-light sensor from Step 1 — against a threshold value set on the dashboard (800 in the screenshot below).
+      </p>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        Covering the LDR blocks light from reaching it, so its reading drops below the threshold — the ESP32 reads this as "it's dark now" and automatically switches the bulb <strong>ON</strong>. Uncovering it lets light back in, the reading rises back above the threshold, and the ESP32 automatically switches the bulb <strong>OFF</strong> again — turning the sensor into a simple automatic light-in-the-dark switch, with the threshold itself adjustable straight from the dashboard.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo4.png" alt="The live IoT Dashboard showing Manual and Automatic mode buttons, Bulb ON/Bulb OFF controls, and the Automatic Mode LDR Threshold field set to 800">
+        <figcaption class="week-photo-caption">The live dashboard — Manual bulb control alongside Automatic mode with its LDR threshold</figcaption>
+      </figure>
+
+      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 6 — History and analytics</h4>
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
+        The dashboard also keeps a running history: temperature, humidity, and ambient light trends charted over time, plus a full historical data table I can download as a CSV — turning the ESP32 into a proper logged environmental monitor rather than just a live readout.
+      </p>
+      <figure class="week-photo-figure" style="margin:0 0 24px;">
+        <img src="assets/task5-photo5.png" alt="Analytics page with temperature, humidity and ambient light history charts, plus a historical data table with a Download CSV button">
+        <figcaption class="week-photo-caption">Temperature, humidity and ambient light history, plus the full historical data table with CSV export</figcaption>
+      </figure>
+
+      <div class="week-photo-grid" style="margin-bottom:6px;">
+        <div>
+          <div class="week-video-wrap">
+            <video controls preload="metadata" playsinline class="week-local-video" title="Manual mode — turning the bulb ON from the dashboard">
+              <source src="assets/task5-video1.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+          </div>
+          <figcaption class="week-photo-caption" style="text-align:center;">Manual mode — pressing Bulb ON and OFF on the dashboard</figcaption>
+        </div>
+        <div>
+          <div class="week-video-wrap">
+            <video controls preload="metadata" playsinline class="week-local-video" title="Manual mode — turning the bulb OFF from the dashboard">
+              <source src="assets/task5-video2.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+          </div>
+          <figcaption class="week-photo-caption" style="text-align:center;">Automatic mode — covering and uncovering the LDR</figcaption>
+        </div>
+        <div>
+          <div class="week-video-wrap">
+            <video controls preload="metadata" playsinline class="week-local-video" title="Automatic mode — the bulb responding to the LDR sensor being covered and uncovered">
+              <source src="assets/task5-video3.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+          </div>
+          <figcaption class="week-photo-caption" style="text-align:center;">Automatic mode — covering and uncovering the LDR switches the bulb on its own</figcaption>
+        </div>
+      </div>
+
+      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
+        <strong>Result:</strong> the ESP32 and its sensors fully integrated with the Firebase dashboard from Task 4 — live readings, working bulb control in both Manual mode and an Automatic mode driven by the LDR's ambient-light threshold, and a logged history with CSV export, all behind the login screen.
+      </p>
+    </div>
+
+    <!-- ============================================
+         KEY LEARNINGS — combined across Tasks 4 & 5
+         ============================================ -->
+    <div class="card-warm" style="padding:40px 36px;margin-bottom:32px;">
+      <span class="modal-week">Key Learnings</span>
+      <h3 class="modal-title" style="margin-top:12px;">What Building the Firebase Dashboard Taught Me</h3>
+      <div class="modal-entry">
+        <p>Splitting this into two tasks — build the platform first, then connect the hardware — turned out to be the most useful decision of the whole project.</p>
+        <ul>
+          <li>Getting Firebase Hosting, Authentication, and the Realtime Database working and deployed before touching any hardware meant Task 5 was purely about the ESP32 side, with nothing else to debug at the same time.</li>
+          <li>The Firebase CLI workflow — <code>firebase login</code>, <code>firebase init hosting</code>, <code>firebase deploy</code> — is a genuinely quick way to go from a blank project folder to a live, public URL.</li>
+          <li>A login screen isn't just for looks — putting the dashboard behind Firebase Authentication meant the sensor data and bulb control were only reachable by accounts I'd explicitly added.</li>
+          <li>Structuring the Realtime Database ahead of time (current / history / sensors / settings) made the ESP32 firmware much simpler to write, since it always knew exactly where to write and read each value.</li>
+          <li>The same API key, database URL, and Authentication credentials used for the web app are what let the ESP32 write into the exact same project — the dashboard and the firmware are really just two different clients of one shared backend.</li>
+          <li>Logging every reading to a history node, not just overwriting the "current" value, is what makes charts, trends, and CSV export possible later — that decision has to be made in the firmware from day one.</li>
+          <li>A single sensor can drive two very different behaviours depending on the mode it's read in — the same LDR value is just a number on the dashboard in Manual mode, but becomes an automatic on/off trigger the moment Automatic mode compares it against a threshold.</li>
+        </ul>
+      </div>
+      <div class="reflection-block" style="margin-top:10px;">
+        <div class="reflection-label">Reflection</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">This project made the gap between "a device with sensors" and "a real product" much clearer to me. Task 4 was almost entirely about infrastructure — hosting, login, and a database schema — before a single sensor reading existed. Task 5 was where it actually became a product: real temperature and humidity on a live dashboard, a bulb I could switch from a browser in Manual mode or let respond automatically to the LDR sensor in Automatic mode, and a history I could look back through or export. Seeing the same Firebase project serve both the web app and the ESP32 firmware helped me understand backends as something shared across multiple kinds of clients, not just "a website's database." That's a pattern I expect to reuse in almost every connected project from here on.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-name">Designed & Developed by Akshaya M</div>
+    <div class="footer-copy">© 2026 All Rights Reserved</div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 400){ btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

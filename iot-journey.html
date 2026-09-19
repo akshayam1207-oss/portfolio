@@ -333,6 +333,29 @@
       </p>
     </div>
 
+    <!-- ============================================
+         KEY LEARNINGS — combined across Tasks 1, 2 & 3
+         ============================================ -->
+    <div class="card-warm" style="padding:40px 36px;margin-bottom:32px;">
+      <span class="modal-week">Key Learnings</span>
+      <h3 class="modal-title" style="margin-top:12px;">What These Three Tasks Taught Me About IoT & Connectivity</h3>
+      <div class="modal-entry">
+        <p>Across all three tasks, the same ESP32 ended up talking to the outside world in three completely different ways — and each one taught me something different about how connected devices actually work.</p>
+        <ul>
+          <li>A device can be its own server — Task 1 showed that an ESP32 doesn't need any external platform to be controllable; it can host its own web page and respond to requests directly.</li>
+          <li>Cloud platforms like Adafruit IO turn a device into something controllable from anywhere, not just the local network — Task 2's dashboard worked the same whether I was near the board or not.</li>
+          <li>The same feed/value logic can be triggered by completely different inputs — Task 3 proved that a dashboard toggle and a spoken voice command can both drive the exact same <code>handleRelay()</code> function without changing a single line of ESP32 code.</li>
+          <li>Software correctness isn't the whole story — the loose relay connection in Task 2 was a reminder that when behaviour is inconsistent but the code looks right, the problem is very often a physical one.</li>
+          <li>Reusability matters — building Task 2's hardware and feed logic properly meant Task 3 needed zero new wiring, just a new trigger pointed at the same feed.</li>
+          <li>IFTTT is a genuinely useful bridge between consumer voice assistants and IoT platforms like Adafruit IO, without needing to write any Google Assistant integration code myself.</li>
+        </ul>
+      </div>
+      <div class="reflection-block" style="margin-top:10px;">
+        <div class="reflection-label">Reflection</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">Working through these three tasks back to back made it clear that "IoT" isn't one technique — it's a set of different ways to get a device talking to something else, each with its own trade-offs. A local web server is simple and fast but only reachable on the same network. A cloud dashboard like Adafruit IO adds reach and persistence at the cost of depending on an external service. Voice control through IFTTT adds a genuinely different, hands-free interface on top of infrastructure I'd already built. Debugging the loose relay connection in Task 2 was probably the most valuable moment of the week — it taught me to check hardware first when software logs look correct but the physical result doesn't match, a habit I'll carry into every future embedded project.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 

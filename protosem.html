@@ -605,11 +605,11 @@ const protosemData = {
       photoGrid: [
         {
           img: "assets/week6-photo1.jpeg",
-          caption: "Initial hand-drawn wireframes developed to plan the finance management and tracking system interface"
+          caption: "Developing the initial UI/UX solution based on the identified user needs"
         },
         {
           img: "assets/week6-photo2.jpeg",
-          caption: "Creating the site map and user flow to organize the structure of the finance management and tracking system"
+          caption: "Creating the solution wireframe and user flow in Figma"
         }
       ]
     },
@@ -634,16 +634,16 @@ const protosemData = {
       ],
       video: {
         url: "assets/week6-video.mp4",
-        caption: "Soldering and assembling the electronic circuit"
+        caption: "Soldering and assembling the individual electronics circuit"
       },
       photoGrid: [
         {
           img: "assets/week6-photo3.jpeg",
-          caption: "Soldering the electronic components and making the required circuit connections"
+          caption: "Individual soldering and assembly of the electronic components on the board"
         },
         {
           img: "assets/week6-photo4.jpeg",
-          caption: "Completed electronics assembly with the required connections and battery"
+          caption: "Completed individual electronics assembly with the required connections and battery"
         }
       ]
     },
@@ -706,11 +706,11 @@ const protosemData = {
       photoRow: [
         {
           img: 'assets/week7-photo2.jpeg',
-          caption: 'ESP32 and OLED display setup for displaying the team name and system output'
+          caption: 'ESP32 + OLED display + joystick setup and working prototype'
         },
         {
           img: 'assets/week7-photo3.png',
-          caption: 'ESP32-based Pac-Man game displayed on the OLED using joystick control'
+          caption: 'Reference game image used as inspiration for the Pac-Man style implementation'
         }
       ],
       video: {
@@ -738,6 +738,21 @@ const protosemData = {
       link: {
         href: 'iot-journey.html',
         label: 'Explore the IoT & Connectivity Deep Dive'
+      }
+    },
+
+    {
+      heading: 'Firebase-Connected Smart IoT Dashboard',
+      paragraphs: [
+        'Building on the IoT tasks above, I also built a complete Firebase-backed dashboard for the same ESP32 setup — a hosted, login-protected web app that shows live sensor readings and lets me control the bulb from the browser, plus a full history view with CSV export.',
+
+        'This involved two more tasks: creating and deploying the Firebase project itself (Hosting, Authentication, and the Realtime Database), and then integrating the ESP32 firmware so its sensor data and bulb state actually show up on that dashboard live.',
+
+        'Because this also involves its own setup and a good number of steps, it has its own dedicated page — same format as the IoT deep dive above.'
+      ],
+      link: {
+        href: 'firebase-project.html',
+        label: 'Explore the Firebase Dashboard Project'
       }
     }
 
