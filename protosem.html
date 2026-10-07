@@ -91,7 +91,14 @@
      {img:'assets/photo2.jpg', caption:'...'}
    ],
    video: {url:'assets/video.mp4', caption:'...'}
-   The two photos render side by side first, then the video renders full-width underneath. */
+   The two photos render side by side first, then the video renders full-width underneath.
+
+   If the video itself is a PORTRAIT/vertical recording (tall phone video), add
+   portrait:true to the video object, e.g.:
+   video: {url:'assets/vertical-clip.mp4', caption:'...', portrait:true}
+   This keeps the video box narrower so it hugs the vertical footage instead of
+   stretching it into a wide landscape box with big black bars on both sides.
+   Leave portrait out (or false) for normal landscape videos — they're unaffected. */
 const protosemData = {
   0: {
     title: 'Week 0',
@@ -754,9 +761,47 @@ const protosemData = {
         href: 'firebase-project.html',
         label: 'Explore the Firebase Dashboard Project'
       }
+    },
+
+    {
+      heading: 'RTOS & Embedded Systems Session',
+      paragraphs: [
+        'We had a session on RTOS (Real-Time Operating System) and embedded systems, where we learned how RTOS helps manage multiple tasks on a microcontroller by scheduling them based on priority and timing instead of running everything in a single sequential loop like a normal Arduino program.',
+
+        'As a hands-on activity, we worked with an IR sensor and an LED to understand task scheduling in practice — observing how the system could handle sensing and output as separate tasks, and how this concept of task scheduling is important in real embedded applications where multiple operations need to happen reliably at the same time.'
+      ]
+     
+      ,
+      photoRow: [
+        { img: 'assets/week7-photo4.png', caption: '' },
+        { img: 'assets/week7-photo5.jpeg', caption: '' }
+      ],
+      video: {
+        url: 'assets/week7-rtos-video.mp4',
+        caption: '',
+        portrait: true
+      }
+      
+    },
+
+    {
+      heading: 'Key Learnings',
+      paragraphs: [],
+      list: [
+        'Learned how sensors and actuators work together in embedded systems through individual study of the LM35 temperature sensor and DC motor.',
+        'Understood communication protocols such as SPI, UART, and I²C, and the role of baud rate in serial communication.',
+        'Built a simple Pac-Man style game on an OLED display using ESP32 and a joystick, combining input, processing, and output in one system.',
+        'Improved survey design skills by revising questions and adding open-ended questions based on mentor feedback.',
+        'Gained hands-on experience with IoT connectivity — web servers, MQTT with Adafruit IO, relays, and voice control through IFTTT and Google Assistant.',
+        'Built and deployed a complete Firebase-backed IoT dashboard with Hosting, Authentication, and Realtime Database, integrated with live ESP32 sensor data.',
+        'Understood the basics of RTOS and task scheduling, and how real-time operating systems manage multiple tasks on embedded hardware.'
+      ]
     }
 
-  ]
+  ],
+
+  reflection:
+    'Week 7 brought together almost everything from the earlier weeks into one connected stretch of learning — sensors and actuators, communication protocols, a hands-on ESP32 project, improved research methods, and a deep dive into IoT connectivity and cloud-connected dashboards. Building the Firebase dashboard on top of the IoT tasks showed me how a project grows from individual working parts into one complete system, while the RTOS session gave me a glimpse into how real embedded systems manage multiple tasks reliably. Overall, this week felt like a turning point where hardware, software, and cloud all came together in a single project.'
 }
 };
 
@@ -813,7 +858,7 @@ function openWeekModal(week){
     `).join('')}
   </div>
   ${entry.video ? `
-    <div class="week-video-wrap">
+    <div class="week-video-wrap${entry.video.portrait ? ' portrait' : ''}">
       <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
         <source src="${entry.video.url}" type="video/mp4">
         Your browser does not support the video element.
@@ -828,7 +873,7 @@ function openWeekModal(week){
       <figcaption class="week-photo-caption">${entry.photo.caption}</figcaption>
     </figure>
     <div class="week-media-row-item">
-      <div class="week-video-wrap">
+      <div class="week-video-wrap${entry.video.portrait ? ' portrait' : ''}">
         <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
           <source src="${entry.video.url}" type="video/mp4">
           Your browser does not support the video element.
@@ -840,7 +885,7 @@ function openWeekModal(week){
 ` : `
   ${entry.photo ? `<figure class="week-photo-figure" style="margin:14px 0 18px;"><img src="${entry.photo.img}" alt="${entry.photo.caption}"><figcaption class="week-photo-caption">${entry.photo.caption}</figcaption></figure>` : ''}
   ${entry.video ? `
-    <div class="week-video-wrap">
+    <div class="week-video-wrap${entry.video.portrait ? ' portrait' : ''}">
       <video controls preload="metadata" playsinline class="week-local-video" title="${entry.video.caption}">
         <source src="${entry.video.url}" type="video/mp4">
         Your browser does not support the video element.
