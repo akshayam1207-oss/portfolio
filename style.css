@@ -556,7 +556,8 @@ a.protosem-stat:active{transform:translateY(-1px);}
   align-items:center;
   overflow:hidden;
   border-radius:18px;
-  background:#111;
+  background:#fff;
+  border:1px solid var(--line);
 }
 .week-local-video{
   width:100%;
@@ -564,6 +565,7 @@ a.protosem-stat:active{transform:translateY(-1px);}
   height:auto;
   display:block;
   object-fit:contain;
+  background:#fff;
 }
 
 /* ============================================
@@ -632,7 +634,7 @@ a.protosem-stat:active{transform:translateY(-1px);}
   max-height:100%;
   object-fit:contain;
   border-radius:10px;
-  background:#111;
+  background:#fff;
   display:block;
 }
 
@@ -654,3 +656,99 @@ a.protosem-stat:active{transform:translateY(-1px);}
     max-height:300px;
   }
 }
+
+/* ============================================
+   VIDEO — white letterbox space everywhere
+   ============================================ */
+.week-video-wrap,
+.week-media-row-item .week-video-wrap{background:#fff;}
+.week-local-video,
+.week-media-row-item .week-local-video{background:#fff;}
+video{background:#fff;}
+
+/* ============================================
+   HOME — section spacing / anchors
+   ============================================ */
+section{scroll-margin-top:70px;}
+#about{padding-top:130px;}
+#skills{background:var(--bg-panel);overflow:hidden;}
+#experience{background-color:var(--bg-panel);}
+#interests{overflow:hidden;}
+#objective{overflow:hidden;}
+
+/* ============================================
+   SKILLS CARDS
+   ============================================ */
+.year-pill{display:inline-block;font-size:0.82rem;padding:10px 20px;}
+.skill-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:48px;}
+.skill-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:30px 28px 32px;box-shadow:var(--shadow-sm);
+  transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.skill-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(47,117,102,0.35);}
+.skill-icon{
+  width:54px;height:54px;border-radius:16px;margin-bottom:26px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--teal-mist);color:var(--teal-deep);
+}
+.skill-icon svg{width:26px;height:26px;}
+.skill-card-title{font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--ink);margin-bottom:18px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-tag{
+  font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-soft);
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  transition:all 0.3s var(--ease);cursor:default;
+}
+.skill-tag:hover{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border-color:transparent;transform:translateY(-2px);}
+.skill-card-wide{display:flex;align-items:flex-start;gap:26px;margin-top:22px;}
+.skill-card-wide .skill-icon{margin-bottom:0;flex-shrink:0;}
+@media (max-width:1100px){.skill-cards{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.skill-cards{grid-template-columns:1fr;}.skill-card-wide{flex-direction:column;}}
+
+/* nav gets crowded with 7 links — tighten slightly */
+.nav-links a{padding:9px 14px;}
+@media (max-width:1000px) and (min-width:769px){.nav-links a{padding:8px 10px;font-size:0.84rem;}}
+
+/* ============================================
+   CIRCLE CURSOR (dot + ring)
+   ============================================ */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:99999;border-radius:50%;
+  opacity:0;transition:opacity 0.3s ease;
+}
+.cursor-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--teal);}
+.cursor-ring{
+  width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid var(--blue);
+  transition:opacity 0.3s ease, width 0.3s var(--ease), height 0.3s var(--ease), margin 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{opacity:1;}
+body.cursor-hover .cursor-ring{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(47,117,102,0.14);border-color:var(--teal);}
+body.cursor-down .cursor-ring{width:28px;height:28px;margin:-14px 0 0 -14px;}
+body.cursor-native .cursor-dot,body.cursor-native .cursor-ring{opacity:0;}
+
+@media (hover:hover) and (pointer:fine){
+  body.cursor-on, body.cursor-on *{cursor:none;}
+  body.cursor-on video, body.cursor-on video *, body.cursor-on iframe{cursor:auto;}
+}
+@media (hover:none), (pointer:coarse){.cursor-dot,.cursor-ring{display:none;}}
+
+
+/* ============================================
+   BUBBLES — small floating dots on every section
+   ============================================ */
+.bubble-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.bubble{position:absolute;border-radius:50%;opacity:0;animation:bubbleDrift ease-in-out infinite;}
+@keyframes bubbleDrift{
+  0%{transform:translate(0,0);opacity:0;}
+  20%{opacity:0.45;}
+  80%{opacity:0.45;}
+  100%{transform:translate(24px,-70px);opacity:0;}
+}
+
+/* ============================================
+   HERO SCROLL BUTTON
+   ============================================ */
+.scroll-indicator{cursor:pointer;transition:opacity 0.4s var(--ease);font-family:var(--font-mono);letter-spacing:0.12em;text-transform:uppercase;}
+.scroll-indicator.hide{opacity:0;pointer-events:none;}
+.scroll-indicator:hover .mouse{border-color:var(--teal);}

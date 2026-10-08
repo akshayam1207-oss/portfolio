@@ -100,6 +100,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
+  /* ---------- Floating bubbles on every section of every page ---------- */
+  function buildSectionBubbles(){
+    const colors = ['#33506B', '#2F7566', '#7E97AC'];
+    document.querySelectorAll('section:not(#hero)').forEach(sec => {
+      if(sec.querySelector(':scope > .bubble-layer')) return;
+      const layer = document.createElement('div');
+      layer.className = 'bubble-layer';
+      const perScreen = window.innerWidth < 768 ? 7 : 13;
+      const count = Math.min(60, Math.max(8, Math.round(sec.offsetHeight / window.innerHeight * perScreen)));
+      for(let i = 0; i < count; i++){
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.random() * 5 + 2;
+        b.style.width = b.style.height = size + 'px';
+        b.style.left = Math.random() * 100 + '%';
+        b.style.top = Math.random() * 100 + '%';
+        b.style.background = colors[i % colors.length];
+        b.style.animationDuration = (Math.random() * 8 + 8) + 's';
+        b.style.animationDelay = (-Math.random() * 12) + 's';
+        layer.appendChild(b);
+      }
+      sec.insertBefore(layer, sec.firstChild);
+    });
+  }
+  if(document.readyState === 'complete') buildSectionBubbles();
+  else window.addEventListener('load', buildSectionBubbles);
+
+  /* ---------- Hero scroll button ---------- */
+  const scrollInd = document.querySelector('.scroll-indicator');
+  if(scrollInd){
+    window.addEventListener('scroll', () => scrollInd.classList.toggle('hide', window.scrollY > 80), {passive:true});
+  }
+
+  /* ---------- Circle cursor (dot + ring) ---------- */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    const dot = document.createElement('div'); dot.className = 'cursor-dot';
+    const ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.appendChild(ring); document.body.appendChild(dot);
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    window.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      document.body.classList.add('cursor-on');
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+    }, {passive:true});
+    (function loop(){
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
+      requestAnimationFrame(loop);
+    })();
+    document.addEventListener('mouseover', (e) => {
+      const t = e.target;
+      document.body.classList.toggle('cursor-native', !!t.closest('video, iframe'));
+      document.body.classList.toggle('cursor-hover', !!t.closest('a, button, .week-row, .badge, .chip, .skill-tag, .skill-card, .tag, .contact-link'));
+    });
+    document.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
+    document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
+    document.documentElement.addEventListener('mouseleave', () => document.body.classList.remove('cursor-on'));
+  }
+
+  /* ---------- Active nav link while scrolling the home page ---------- */
+  if(document.getElementById('hero')){
+    const map = {hero:'index.html', about:'index.html#about', interests:'index.html#about', objective:'index.html#about', skills:'index.html#skills', experience:'index.html#experience'};
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    function spy(){
+      let cur = 'hero';
+      const y = window.scrollY + 160;
+      Object.keys(map).forEach(id => { const el = document.getElementById(id); if(el && el.offsetTop <= y) cur = id; });
+      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === map[cur]));
+    }
+    window.addEventListener('scroll', spy, {passive:true});
+    spy();
+  }
+
   /* ---------- Generic modal (used on protosem page) ---------- */
   const modalOverlay = document.getElementById('modalOverlay');
   if(modalOverlay){
