@@ -774,12 +774,12 @@ const protosemData = {
      
       ,
       photoRow: [
-        { img: 'assets/week7-photo4.png', caption: '' },
-        { img: 'assets/week7-photo5.jpeg', caption: '' }
+        { img: 'assets/week7-photo4.png', caption: 'RTOS setup: Interfacing the microcontroller with an IR sensor and LED' },
+        { img: 'assets/week7-photo5.jpeg', caption: 'Assembled Hardware Prototype: ESP32, GPS module, and sensor connections on the breadboard.' }
       ],
       video: {
         url: 'assets/week7-rtos-video.mp4',
-        caption: '',
+        caption: 'Working demonstration (Video): Demonstrating sensor-based LED control with RTOS task execution.',
         portrait: true
       }
       
@@ -803,6 +803,116 @@ const protosemData = {
 
   reflection:
     'Week 7 brought together almost everything from the earlier weeks into one connected stretch of learning — sensors and actuators, communication protocols, a hands-on ESP32 project, improved research methods, and a deep dive into IoT connectivity and cloud-connected dashboards. Building the Firebase dashboard on top of the IoT tasks showed me how a project grows from individual working parts into one complete system, while the RTOS session gave me a glimpse into how real embedded systems manage multiple tasks reliably. Overall, this week felt like a turning point where hardware, software, and cloud all came together in a single project.'
+},
+
+8: {
+  title: 'Week 8',
+
+  entries: [
+
+    {
+      heading: 'PS POC Development and Customer Discovery',
+      paragraphs: [
+        'We continued developing and testing our Problem Statement (PS) Proof of Concept (POC). Our work included soldering the electronic components onto a dot board, assembling the GPS module, and testing GPS location functionality under open-sky conditions. We also explored BLE communication range within the college campus and worked on app enhancements.',
+
+        'Alongside hardware development, we reviewed customer discovery survey responses, documented feedback, and verified the Statement of Work (SOW) with the Single Point of Contact (SPOC). We also began measuring and identifying mechanical enclosure requirements, including drilling and component placement.'
+      ],
+      listLabel: 'Key Activities',
+      list: [
+        'Soldered and assembled components for the first hardware iteration.',
+        'Tested GPS location functionality and BLE communication range.',
+        'Worked on app improvements based on project needs.',
+        'Reviewed customer discovery surveys and documented feedback.',
+        'Verified the SOW with the SPOC and explored mechanical enclosure requirements.'
+      ]
+      
+      ,
+      photo: { img: 'assets/week8-photo1.png', caption: 'POC Hardware Iteration: Dot-board assembly and soldering of the GPS and controller components.' }
+      
+    },
+
+    {
+      heading: 'Introduction to Robotics and Robot Selection',
+      paragraphs: [
+        'We were introduced to the fundamentals of robotics, including basic robot concepts and different types of robot navigation. We then worked in teams to evaluate suitable robot configurations based on the given requirements and a credit limit of 100.',
+
+        'After comparing the available options, our team selected SCARA and Cartesian robots for further consideration based on our project requirements and the selection constraints.'
+      ],
+      listLabel: 'Key Activities',
+      list: [
+        'Learned the fundamentals of robotics and robot navigation.',
+        'Explored different robot types and their applications.',
+        'Evaluated robot options against the given requirements and credit limit.',
+        "Selected SCARA and Cartesian robots for our team's proposed solution."
+      ]
+      
+      ,
+      photo: { img: 'assets/week8-photo2.png', caption: 'Evaluating robot specifications against factory requirements and the available credit limit.' }
+      
+    },
+
+    {
+      heading: 'Ubuntu Setup and ROS 2 Fundamentals',
+      paragraphs: [
+        'We installed and configured Ubuntu on our personal laptops using Oracle VirtualBox and began learning Robot Operating System 2 (ROS 2). We explored basic terminal commands, workspace organization, package creation, and the process of building ROS 2 packages.',
+
+        'As an introductory hands-on exercise, we launched TurtleSim and experimented with controlling the simulated turtle. We then created a Python-based ROS 2 package in Visual Studio Code and implemented a node that commands the turtle to draw my name, AKSHAYA, in the simulation.'
+      ],
+      listLabel: 'Key Activities',
+      list: [
+        'Set up Ubuntu in a virtual machine using Oracle VirtualBox.',
+        'Learned basic Linux terminal commands and ROS 2 workspace structure.',
+        'Created and built a ROS 2 package.',
+        'Launched TurtleSim and explored turtle movement.',
+        'Developed and executed a Python ROS 2 node to draw my name in TurtleSim.'
+      ]
+      
+      ,
+      photoGrid: [
+        { img: 'assets/week8-photo3.png', caption: 'Setting up Ubuntu and exploring ROS 2 using VirtualBox.' },
+        { img: 'assets/week8-photo4.jpeg', caption: 'Learning ROS 2 commands and drawing patterns using TurtleSim.' },
+        { img: 'assets/week8-photo5.jpeg', caption: 'ROS 2 Programming: Creating a Python package to draw my name in TurtleSim.' },
+        { img: 'assets/week8-photo6.jpeg', caption: 'Executing a custom ROS 2 node to draw “AKSHAYA” in the simulation.' }
+      ]
+      
+    },
+
+    {
+      heading: 'Robot Modelling with Fusion 360 and',
+      paragraphs: [
+        'We explored robot modelling using Fusion 360 and worked on designing a robot model for simulation. We then exported the model and prepared to use it within the Ubuntu environment, where we installed Gazebo and explored its role in robotics simulation.',
+
+        'This activity introduced us to the workflow of connecting 3D robot design with simulation tools, providing a foundation for studying robot structure and behaviour in a virtual environment.'
+      ],
+      listLabel: 'Key Activities',
+      list: [
+        'Designed a robot model using Fusion 360.',
+        'Exported the model for use in a simulation workflow.',
+        'Installed Gazebo in the Ubuntu environment.',
+        'Explored how robot modelling and simulation tools support robotics development.'
+      ]
+      ,
+      photo: { img: 'assets/week8-photo7.png', caption: 'Fusion 360 Robot Model: 3D robot design prepared for simulation.' }
+      
+    },
+
+    {
+      heading: 'Key Learnings',
+      paragraphs: [],
+      list: [
+        'Gained practical experience in hardware assembly, soldering, GPS testing, and BLE range testing.',
+        'Understood the importance of customer discovery, feedback documentation, and validating project requirements with the SPOC.',
+        'Improved my understanding of robot types, navigation concepts, and requirement-based robot selection.',
+        'Learned the basics of Ubuntu, ROS 2 workspaces, packages, terminal commands, and package building.',
+        'Developed a simple ROS 2 Python node to control TurtleSim and draw my name.',
+        'Explored the workflow from 3D robot modelling in Fusion 360 to simulation using Gazebo.'
+      ]
+    }
+
+  ],
+
+  reflection:
+    'Week 8 helped me connect hardware prototyping, customer research, software development, and robotics simulation. Testing GPS and BLE functionality gave me practical exposure to our POC, while documenting customer feedback helped me understand the importance of validating a solution against user needs. The ROS 2 sessions strengthened my confidence in working with Linux commands, Python nodes, and simulation tools. Overall, this week broadened my understanding of how hardware, applications, and robotics software can work together to develop and validate a complete engineering solution.'
 }
 };
 
