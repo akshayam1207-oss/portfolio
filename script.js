@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Floating particles (hero only) ---------- */
   const particleWrap = document.getElementById('particles');
   if(particleWrap){
-    const particleColors = ['#33506B', '#2F7566', '#7E97AC'];
+    const particleColors = ['var(--bubble-a)', 'var(--bubble-b)', 'var(--bubble-c)'];
     const particleCount = window.innerWidth < 768 ? 14 : 26;
     for(let i=0;i<particleCount;i++){
       const p = document.createElement('div');
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Floating bubbles on every section of every page ---------- */
   function buildSectionBubbles(){
-    const colors = ['#33506B', '#2F7566', '#7E97AC'];
+    const colors = ['var(--bubble-a)', 'var(--bubble-b)', 'var(--bubble-c)'];
     document.querySelectorAll('section:not(#hero)').forEach(sec => {
       if(sec.querySelector(':scope > .bubble-layer')) return;
       const layer = document.createElement('div');
@@ -134,6 +134,75 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => scrollInd.classList.toggle('hide', window.scrollY > 80), {passive:true});
   }
 
+  /* ---------- Light / dark toggle ---------- */
+  (function(){
+    const root = document.documentElement;
+    const inner = document.querySelector('.nav-inner');
+    const burger = document.getElementById('navToggle');
+    if(!inner) return;
+    const btn = document.createElement('button');
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label', 'Toggle light / dark mode');
+    btn.innerHTML = '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' +
+      '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-actions';
+    wrap.appendChild(btn);
+    if(burger){ burger.parentNode.insertBefore(wrap, burger); wrap.appendChild(burger); }
+    else inner.appendChild(wrap);
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('theme', next); }catch(e){}
+    });
+  })();
+
+  /* ---------- Typing effect (hero) ---------- */
+  const typedEl = document.getElementById('typed');
+  if(typedEl){
+    const roles = ['Software Engineer', 'IoT Builder', 'Product Thinker'];
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      typedEl.textContent = roles[0];
+    } else {
+      let r = 0, c = 0, deleting = false;
+      (function tick(){
+        const word = roles[r];
+        c += deleting ? -1 : 1;
+        typedEl.textContent = word.slice(0, c);
+        let delay = deleting ? 45 : 90;
+        if(!deleting && c === word.length){ delay = 1700; deleting = true; }
+        else if(deleting && c === 0){ deleting = false; r = (r + 1) % roles.length; delay = 350; }
+        setTimeout(tick, delay);
+      })();
+    }
+  }
+
+  /* ---------- Card tilt + magnetic buttons (mouse devices only) ---------- */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.skill-card, .skills-block, .project-detail-block, .project-visual-big, .timeline-card, .edu-card, .objective-card').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        const k = r.width > 700 ? 0.4 : 1;
+        el.style.transition = 'transform 0.12s ease-out';
+        el.style.transform = 'perspective(900px) rotateX(' + (-py * 8 * k) + 'deg) rotateY(' + (px * 8 * k) + 'deg) translateY(-4px)';
+      });
+      el.addEventListener('mouseleave', () => { el.style.transition = ''; el.style.transform = ''; });
+    });
+
+    document.querySelectorAll('.btn, #back-to-top, .week-link-card').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        if(el.id === 'back-to-top' && !el.classList.contains('show')) return;
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - (r.left + r.width / 2)) * 0.32;
+        const y = (e.clientY - (r.top + r.height / 2)) * 0.32;
+        el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
   /* ---------- Circle cursor (dot + ring) ---------- */
   if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
     const dot = document.createElement('div'); dot.className = 'cursor-dot';
@@ -153,7 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseover', (e) => {
       const t = e.target;
       document.body.classList.toggle('cursor-native', !!t.closest('video, iframe'));
-      document.body.classList.toggle('cursor-hover', !!t.closest('a, button, .week-row, .badge, .chip, .skill-tag, .skill-card, .tag, .contact-link'));
+      document.body.classList.toggle('cursor-hover', !!t.closest('a, button, .week-row, .badge, .chip, .skill-tag, .tag, .contact-link'));
+      document.body.classList.toggle('cursor-glow', !!t.closest('.project-showcase, .skill-card, .timeline-card'));
     });
     document.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
     document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));

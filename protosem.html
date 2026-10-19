@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProtoSem Journey — Akshaya M</title>
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -99,7 +100,10 @@
    video: {url:'assets/vertical-clip.mp4', caption:'...', portrait:true}
    This keeps the video box narrower so it hugs the vertical footage instead of
    stretching it into a wide landscape box with big black bars on both sides.
-   Leave portrait out (or false) for normal landscape videos — they're unaffected. */
+   Leave portrait out (or false) for normal landscape videos — they're unaffected.
+
+   To put ONE extra photo centred BELOW a photoGrid (e.g. Week 9), add photoCenter to the entry:
+   photoCenter: {img:'assets/photo.png', caption:'...'} */
 const protosemData = {
   0: {
     title: 'Week 0',
@@ -914,6 +918,204 @@ const protosemData = {
   reflection:
     'Week 8 helped me connect hardware prototyping, customer research, software development, and robotics simulation. Testing GPS and BLE functionality gave me practical exposure to our POC, while documenting customer feedback helped me understand the importance of validating a solution against user needs. The ROS 2 sessions strengthened my confidence in working with Linux commands, Python nodes, and simulation tools. Overall, this week broadened my understanding of how hardware, applications, and robotics software can work together to develop and validate a complete engineering solution.'
 }
+,
+
+9: {
+  title: 'Week 9',
+
+  entries: [
+
+    {
+      heading: 'SIH Internal Hackathon — Problem Selection, Review & Solution Refinement',
+      paragraphs: [
+        'This week focused on the Smart India Hackathon (SIH) internal hackathon at our college, where our team selected our own problem statement from the available options and worked towards securing a place in the final selection of teams representing the college at the national-level Smart India Hackathon.',
+
+        'We presented our problem statement, proposed solution, technical approach, and proof of concept (POC) to the reviewers. We received positive feedback during the initial review, which encouraged us to strengthen our solution further. Based on the review process, we prepared more deeply for possible technical questions, refined our presentation, and improved how we communicated the problem, innovation, feasibility, and expected impact of our solution.'
+      ],
+      photoGrid: [
+        { img: 'assets/week9-photo1.png', caption: 'Proof of Concept (POC) presented to the reviewers: microcontroller board, GPS module, battery and push button assembled on a perfboard.' },
+        { img: 'assets/week9-photo3.jpeg', caption: 'Mobile application: the Kavalan Safety emergency screen and the Safety Scanner that listens for nearby emergency signals.' }
+      ],
+      listLabel: 'Key Activities',
+      list: [
+        'Selected our own problem statement from the available SIH options.',
+        'Presented the problem, proposed solution, technical approach and POC to the reviewers.',
+        'Received positive feedback in the initial review and used it to strengthen the solution.',
+        'Prepared for possible technical questions on feasibility and implementation.',
+        'Refined the presentation to clearly communicate the problem, innovation, feasibility and expected impact.'
+      ]
+    },
+
+    {
+      heading: '36-Hour Hackathon — Prototype Development',
+      paragraphs: [
+        'The internal selection process progressed into an intensive 36-hour hackathon, during which our team worked continuously on developing and refining our proposed solution. We received regular mentor and reviewer visits at our workspace, giving us opportunities to explain our progress, discuss challenges, and improve our implementation.',
+
+        'Our major focus was enhancing the application, developing the hardware prototype, and working on the product enclosure through 3D printing. I also worked on designing the wearable components, including a ring and wristband, using Fusion 360, to explore the physical form and integration of our proposed solution.',
+
+        'Throughout the hackathon, we coordinated our work across the software, hardware, and mechanical aspects of the project. The experience helped us understand the importance of rapid prototyping, teamwork, iterative development, and presenting a solution that connects the problem statement with a practical implementation.'
+      ],
+      photoGrid: [
+        { img: 'assets/week9-photo2.png', caption: 'Product enclosure: Fusion 360 design, the 3D-printed case, and the hardware prepared to fit inside.' },
+        { img: 'assets/week9-photo4.png', caption: 'Wearable form concepts designed in Fusion 360: a wristband (left) and a ring (right).' }
+      ],
+      photoCenter: { img: 'assets/week9-photo5.jpeg', caption: 'The 36-hour SIH internal hackathon in progress, with teams building and refining their prototypes.' },
+      listLabel: 'What I Worked On',
+      list: [
+        'Enhanced the mobile application alongside the team.',
+        'Developed and refined the hardware prototype.',
+        'Worked on the 3D-printed product enclosure.',
+        'Designed a ring and wristband in Fusion 360 to explore the wearable form.',
+        'Explained progress and challenges to mentors and reviewers during their visits.',
+        'Coordinated software, hardware and mechanical work in parallel under time pressure.'
+      ]
+    },
+
+    {
+      heading: 'Key Learnings',
+      paragraphs: [],
+      list: [
+        'Improved my ability to present and defend a problem statement and proposed solution during technical reviews.',
+        'Learned to use reviewer feedback to refine the solution and prepare for challenging technical questions.',
+        'Gained experience in rapid application development, hardware integration, and 3D-printed enclosure development.',
+        'Explored wearable product design by modelling a ring and wristband in Fusion 360.',
+        'Strengthened my understanding of teamwork, time management, and iterative prototyping during an intensive hackathon.',
+        'Learned to communicate innovation, feasibility and expected impact clearly to reviewers.',
+        'Understood how software, hardware and mechanical design must come together to make a complete, usable product.'
+      ]
+    }
+
+  ],
+
+  reflection:
+    'The SIH internal hackathon was a valuable opportunity to move beyond planning and work intensively towards a functional proof of concept. The positive feedback from reviewers motivated us to improve our approach, while repeated reviews encouraged us to think critically about feasibility, implementation, and real-world use. Working through the 36-hour development period strengthened my confidence in presenting technical ideas, collaborating with teammates, and contributing to both the digital and physical aspects of a product. This experience also helped me understand that successful innovation requires continuous testing, feedback, and refinement.'
+}
+,
+
+10: {
+  title: 'Week 10',
+
+  entries: [
+
+    {
+      heading: 'ASADI Session — AI Video Pre-Production Studio',
+      paragraphs: [
+        'During the ASADI session, I received the problem statement AI Video Pre-Production Studio, which focuses on helping creators convert scripts into structured video production plans. I developed a website using Antigravity to organize the workflow from script analysis to scene breakdowns, shot lists, camera directions, props, and B-roll requirements.'
+      ],
+      photoGrid: [
+        { img: 'assets/week10-photo1.png', caption: 'FrameFlow AI: the AI Video Pre-Production Studio home page, turning a script into a shoot-ready plan.' },
+        { img: 'assets/week10-photo2.png', caption: 'Project History: saved production blueprints showing the scenes, shots and duration of each project.' }
+      ],
+      listLabel: 'Key Points',
+      list: [
+        'Every participant received one individual problem statement; mine was the AI Video Pre-Production Studio.',
+        'Built the website using Antigravity, from script input to a complete production plan.',
+        'The workflow covers script analysis, scene breakdowns, shot lists, camera directions, props and B-roll.',
+        'Added a project history view to manage and reopen saved production blueprints.'
+      ]
+    },
+
+    {
+      heading: 'ASADI Session — How AI Works & Using It in Our Careers',
+      paragraphs: [
+        'We also attended a session explaining how AI works and how to use it usefully in our future careers. It helped me see AI as a practical tool that I can apply in my own projects and professional work.'
+      ],
+      listLabel: 'Key Points',
+      list: [
+        'Understood the basic idea of how AI models work and what they can and cannot do.',
+        'Learned how to use AI as a support tool for building, researching and presenting.',
+        'Saw how AI skills can be applied in software, product and innovation careers.',
+        'Realised that understanding how AI works leads to using it more effectively.'
+      ]
+    },
+
+    {
+      heading: 'LangChain, LangSmith & AI Workflow Integration',
+      paragraphs: [
+        'I worked on integrating LangChain-based AI workflows and LangSmith observability into the AI Video Pre-Production Studio. This included tracing and monitoring agent execution to improve workflow visibility and support debugging. I also began exploring the development of a team-based SaaS product.'
+      ],
+      photoGrid: [
+        { img: 'assets/week10-photo3.png', caption: 'LangSmith trace of the Production Planner Agent, showing its input, nested model calls and run time.' },
+        { img: 'assets/week10-photo4.png', caption: 'Shot List Agent output: a shot-by-shot breakdown with camera angle, lens, movement and audio for each shot.' }
+      ],
+      listLabel: 'Key Points',
+      list: [
+        'Integrated LangChain-based AI agents into the production planning workflow.',
+        'Used LangSmith to trace and monitor every agent run.',
+        'Improved workflow visibility and made debugging easier.',
+        'Understood why observability matters when several AI agents work together.',
+        'Began exploring how the project could grow into a team-based SaaS product.'
+      ]
+    },
+
+    {
+      heading: 'SIH 2026 — Final Submission Preparation',
+      paragraphs: [
+        'Following our selection through the college-level SIH internal hackathon, our team prepared the final submission for SAKHI: Your Friend on Every Journey, a women and child safety solution. We refined our proposed solution, structured the presentation according to the official six-slide SIH format, and created a four-minute video demonstrating the problem, our approach, and the proposed solution.'
+      ],
+      listLabel: 'Submission Details',
+      list: [
+        'Problem Statement Title: Women Safety: Personal Safety and Emergency Alert System for Women.',
+        'Theme: IoT and Embedded Hardware.',
+        'Category: Hardware + Software.',
+        'Team ID: 80 · Team Name: Sheildher.'
+      ]
+    },
+
+    {
+      heading: 'SIH 2026 — My Contribution to the Submission',
+      paragraphs: [
+        'Along with the team, I worked on the content of the presentation and on the visuals for the demo video, so that the problem and the solution could be explained clearly and professionally.'
+      ],
+      listLabel: 'What I Worked On',
+      list: [
+        'Prepared the PPT content following the official six-slide SIH format.',
+        'Worked on the video cover for the keychain prototype demo.',
+        'Searched for reference links to support the problem statement and solution.',
+        'Collected and selected photos for the presentation and the video.',
+        'Used AI animation to create visuals for the video cover and storytelling.'
+      ]
+    },
+
+    {
+      heading: 'Solution Demonstration & Prototype Presentation',
+      paragraphs: [
+        'To make our presentation more engaging, we created an animated video with voice-over to explain the real-world safety problem and our proposed solution. We also used 3D printing to create a keychain prototype as a physical representation of our concept for the video demonstration.'
+      ],
+      photoGrid: [
+        { img: 'assets/week10-photo5.png', caption: 'SIH 2026 submission details: problem statement, theme, category and team information.' },
+        { img: 'assets/week10-photo6.jpeg', caption: '3D-printed keychain prototype with the microcontroller, battery and circuit fitted inside the enclosure.' }
+      ],
+      listLabel: 'Key Points',
+      list: [
+        'Created an animated video with voice-over to explain the real-world safety problem.',
+        'Used the animation to walk through the proposed solution step by step.',
+        '3D-printed a keychain prototype as a physical representation of the concept.',
+        'Used the prototype in the demo video to show how the idea would look in real use.'
+      ]
+    },
+
+    {
+      heading: 'Learning Outcomes',
+      paragraphs: [],
+      list: [
+        'Built an AI-powered web application using Antigravity.',
+        'Explored LangChain agents and LangSmith tracing.',
+        'Improved my understanding of AI workflow development and observability.',
+        'Learned how AI works and how to use it usefully in a future career.',
+        'Contributed to SIH presentation preparation and video storytelling.',
+        'Practised finding reliable references and preparing visuals for a presentation.',
+        'Explored 3D printing and AI animation to support the demonstration.',
+        'Strengthened my skills in problem-solving, technical communication, and project presentation.',
+        'Learned to present a solution within a strict official format and a four-minute video.'
+      ]
+    }
+
+  ],
+
+  reflection:
+    'Key takeaway: Week 10 connected AI application development with innovation, prototyping, and the final-stage preparation of our SIH 2026 submission. Building the AI Video Pre-Production Studio showed me how an AI product is more than a single prompt: it is a set of agents working together, and tools like LangSmith make that work visible and easier to debug. The session on how AI works helped me think about using AI usefully in my future career. Preparing the SIH submission taught me to compress a whole idea into six slides and a four-minute video, while the AI animation and the 3D-printed keychain prototype showed me how visuals and a physical object can make a concept feel real. Overall, this week pushed me to move between software, AI, storytelling and hardware in the same few days.'
+}
 };
 
 const TOTAL_WEEKS = 20;
@@ -1014,6 +1216,12 @@ function openWeekModal(week){
             </figure> 
           `).join('')} 
         </div> 
+      ` : ''}
+      ${entry.photoCenter ? `
+        <figure class="week-photo-grid-item week-photo-center">
+          <img src="${entry.photoCenter.img}" alt="${entry.photoCenter.caption}">
+          <figcaption class="week-photo-caption">${entry.photoCenter.caption}</figcaption>
+        </figure>
       ` : ''}
       ${entry.list ? `${entry.listLabel ? `<p style="font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:2px;">${entry.listLabel}</p>` : ''}<ul>${entry.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
       ${entry.link ? `<a class="week-link-card" href="${entry.link.href}"><span>${entry.link.label}</span><span class="week-link-arrow">→</span></a>` : ''}
