@@ -9,6 +9,43 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Page-specific helpers. Uses the theme variables already defined in style.css */
+.iot-body{color:var(--ink-soft);font-size:.96rem;line-height:1.8;margin:0 0 16px;max-width:78ch}
+.iot-h4{font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--ink);margin:34px 0 10px}
+.iot-h5{font-weight:600;font-size:.95rem;color:var(--ink);margin:20px 0 8px}
+.iot-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px;padding:0;list-style:none}
+.iot-toc a{font-size:.8rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line,rgba(128,128,128,.35));color:var(--ink-soft);text-decoration:none}
+.iot-toc a:hover{color:var(--ink)}
+.iot-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin:14px 0 24px}
+.iot-note{border-left:3px solid var(--accent-text,#5eead4);padding:12px 16px;margin:16px 0;background:rgba(128,128,128,.08);border-radius:0 8px 8px 0;font-size:.92rem;line-height:1.7;color:var(--ink-soft)}
+.iot-note b{color:var(--ink)}
+.iot-scroll{overflow-x:auto;margin:12px 0 24px;-webkit-overflow-scrolling:touch}
+.iot-table{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.6;min-width:520px}
+.iot-table th,.iot-table td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(128,128,128,.25);vertical-align:top;color:var(--ink-soft)}
+.iot-table th{color:var(--ink);font-weight:600;font-size:.82rem}
+.iot-table code,.iot-body code,.iot-note code{font-family:'JetBrains Mono',monospace;font-size:.85em}
+pre.iot-code{background:rgba(0,0,0,.35);color:#e6edf3;border-radius:10px;padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.65;margin:10px 0 22px;tab-size:2}
+details.iot-det{margin:10px 0 22px}
+details.iot-det>summary{cursor:pointer;font-weight:600;color:var(--ink);padding:10px 0}
+.iot-diagram{width:100%;max-width:760px;height:auto;display:block;margin:12px auto 6px}
+.iot-diagram text{font-family:Inter,sans-serif;font-size:13px;fill:var(--ink)}
+.iot-diagram .sm{font-size:11px;fill:var(--ink-soft)}
+.iot-diagram rect.b{fill:rgba(128,128,128,.12);stroke:rgba(128,128,128,.6);stroke-width:1.2}
+.iot-diagram rect.hl{fill:rgba(45,212,191,.16);stroke:#2dd4bf;stroke-width:1.5}
+.iot-diagram path,.iot-diagram line{stroke:var(--ink-soft);stroke-width:1.5;fill:none}
+.iot-diagram .wr{stroke-width:2.2}
+.iot-demo{max-width:760px;margin:0 auto}
+.iot-cap{text-align:center;margin:6px 0 20px}
+.repo-list{margin:8px 0 0;padding-left:20px;color:var(--ink-soft);line-height:1.9;font-size:.93rem}
+.repo-list a{color:var(--accent-text)}
+.repo-box{margin:28px 0 4px;padding:28px 30px;border-radius:14px;background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.22)}
+.repo-box-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-text,#2dd4bf);margin-bottom:12px}
+.repo-box-desc{color:var(--ink-soft);font-size:.93rem;line-height:1.7;margin:0 0 20px;max-width:60ch}
+.repo-box-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;background:rgba(128,128,128,.14);border:1px solid rgba(128,128,128,.3);color:var(--ink);font-size:.88rem;font-weight:600;text-decoration:none;transition:background .2s ease}
+.repo-box-btn:hover{background:rgba(128,128,128,.24)}
+@media(max-width:600px){.card-cool,.card-warm{padding:28px 18px!important}}
+</style>
 </head>
 <body>
 
@@ -36,7 +73,6 @@
   <div class="sec-blob mist" style="width:460px;height:460px;bottom:-140px;right:-130px;animation-delay:-3s;"></div>
   <div class="container">
 
-    <!-- Now links back to Week 7's modal on protosem.html, not the top of the page -->
     <a href="protosem.html?week=7" class="week-link-card" style="max-width:260px;margin:0 0 40px;background:var(--paper);color:var(--accent-text);box-shadow:var(--shadow-sm);">
       <span>← Back to Week 7</span>
     </a>
@@ -44,175 +80,405 @@
     <div class="protosem-hero reveal">
       <span class="eyebrow">Week 7 · IoT & Connectivity</span>
       <h2 class="section-title">IoT & Connectivity — Deep Dive</h2>
-      <p class="section-sub" style="margin-left:auto;margin-right:auto;">A step-by-step look at the three IoT tasks from Week 7: an ESP32 web-server LED, an MQTT/Adafruit IO dashboard controlling an LED and a relay-switched 230V bulb, and voice control through IFTTT and Google Assistant.</p>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Three tasks, one ESP32: a self-hosted web server, an MQTT dashboard on Adafruit IO that switches an LED and a relay-driven 230V bulb, and voice automation through IFTTT and Google Assistant.</p>
     </div>
 
-    <!-- Quick task navigation — jumps straight to a task -->
     <div class="protosem-stats reveal" style="margin-bottom:40px;">
       <a href="#task1" class="protosem-stat" style="cursor:pointer;">Task 1 · ESP32 Web Server</a>
       <a href="#task2" class="protosem-stat" style="cursor:pointer;">Task 2 · MQTT + Adafruit IO</a>
-      <a href="#task3" class="protosem-stat" style="cursor:pointer;">Task 3 · Voice Control</a>
+      <a href="#task3" class="protosem-stat" style="cursor:pointer;">Task 3 · IFTTT Automation</a>
     </div>
 
-    <!-- ============================================
-         TASK 1 — ESP32 LED ON/OFF VIA WEB SERVER
-         ============================================ -->
+    <!-- =====================================================
+         TASK 1
+         ===================================================== -->
     <div class="card-cool" id="task1" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 1</span>
-      <h3 class="modal-title" style="margin-top:12px;">ESP32 LED On/Off via Web Server</h3>
+      <h3 class="modal-title" style="margin-top:12px;">ESP32 Web Server & HTML LED Control</h3>
 
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
-        The goal of this task was to turn the ESP32 into its own tiny web server — no app, no external platform — so that visiting its IP address in a browser would show a simple control page with ON and OFF buttons that switch an LED connected to the board.
-      </p>
+      <ul class="iot-toc">
+        <li><a href="#t1-obj">Objective</a></li><li><a href="#t1-concept">Concept</a></li><li><a href="#t1-hw">Hardware</a></li>
+        <li><a href="#t1-wiring">Wiring</a></li><li><a href="#t1-code">Code</a></li><li><a href="#t1-html">HTML interface</a></li>
+        <li><a href="#t1-demo">Photos & video</a></li><li><a href="#t1-problems">Problems</a></li><li><a href="#t1-reflect">Reflection</a></li>
+      </ul>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Writing the sketch and connecting to Wi-Fi</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        I wrote an Arduino sketch that connects the ESP32 to the lab Wi-Fi, starts a lightweight web server on it, and defines two routes — <code>/on</code> and <code>/off</code> — each of which sets the LED pin state and sends back the updated control page as the response. Once uploaded, the Serial Monitor confirmed the board had connected to Wi-Fi, been assigned an IP address, and started the server successfully.
-      </p>
-      <figure class="week-photo-figure" style="margin:0 0 24px;">
+      <h4 class="iot-h4" id="t1-obj" style="margin-top:0">Objective and problem addressed</h4>
+      <p class="iot-body">Switching a device normally means walking up to it and pressing a button. The objective was to remove that limit: make the ESP32 host its own control page so any phone or laptop on the same Wi-Fi network can turn an LED on or off from a browser. The problem being solved is <strong>local remote control with no external app, cloud account or extra hardware</strong>. It is the simplest form of an IoT device, because the device itself is the server.</p>
+
+      <h4 class="iot-h4" id="t1-concept">Concept: how an ESP32 web server works</h4>
+      <p class="iot-body">The ESP32 has a built-in Wi-Fi radio and enough memory to run a small HTTP server. After it joins the router, the router gives it an IP address (for example <code>192.168.1.45</code>). The ESP32 then listens on <strong>port 80</strong>, the standard HTTP port, and waits for requests. Each URL path (a <em>route</em>) is linked to a function in the sketch.</p>
+      <div class="iot-note"><b>Browser ↔ ESP32 communication.</b> The browser is the <b>client</b> and the ESP32 is the <b>server</b>, and both sit on the same Wi-Fi network through the router. Typing the IP address makes the browser send <code>GET /</code> and the ESP32 replies with an HTML page. Pressing a button on that page sends <code>GET /on</code> or <code>GET /off</code>. The matching handler changes the LED pin and replies with <code>200 OK</code> and the refreshed page.</div>
+
+      <svg class="iot-diagram" viewBox="0 0 760 130" role="img" aria-label="Browser sends HTTP GET over Wi-Fi through the router to the ESP32, which drives the LED">
+        <rect class="b" x="10" y="35" width="150" height="60" rx="10"/><text x="85" y="62" text-anchor="middle">Browser</text><text class="sm" x="85" y="80" text-anchor="middle">HTTP client</text>
+        <rect class="b" x="235" y="35" width="130" height="60" rx="10"/><text x="300" y="62" text-anchor="middle">Wi-Fi router</text><text class="sm" x="300" y="80" text-anchor="middle">same network</text>
+        <rect class="hl" x="440" y="35" width="150" height="60" rx="10"/><text x="515" y="62" text-anchor="middle">ESP32</text><text class="sm" x="515" y="80" text-anchor="middle">HTTP server :80</text>
+        <rect class="b" x="660" y="35" width="90" height="60" rx="10"/><text x="705" y="70" text-anchor="middle">LED</text>
+        <line x1="160" y1="55" x2="235" y2="55"/><line x1="365" y1="55" x2="440" y2="55"/><line x1="590" y1="65" x2="660" y2="65"/>
+        <text class="sm" x="198" y="48" text-anchor="middle">GET /on</text><text class="sm" x="402" y="48" text-anchor="middle">GET /on</text>
+        <text class="sm" x="198" y="88" text-anchor="middle">200 OK</text><text class="sm" x="402" y="88" text-anchor="middle">200 OK</text>
+        <text class="sm" x="625" y="58" text-anchor="middle">GPIO 2</text>
+      </svg>
+      <p class="week-photo-caption iot-cap">Request/response path for Task 1</p>
+
+      <h4 class="iot-h4" id="t1-hw">Hardware and software used</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Item</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>ESP32 development board</td><td>Microcontroller with built-in Wi-Fi; runs the web server</td></tr>
+          <tr><td>LED (onboard, GPIO 2)</td><td>Output controlled from the browser</td></tr>
+          <tr><td>220 Ω resistor + external LED (optional)</td><td>Current limiting when using an external LED instead of the onboard one</td></tr>
+          <tr><td>Micro-USB cable</td><td>Power and programming</td></tr>
+          <tr><td>Arduino IDE with ESP32 board package</td><td>Writing, compiling and uploading the sketch; Serial Monitor for debugging</td></tr>
+          <tr><td>Wi-Fi router (lab network)</td><td>Connects the ESP32 and the browser device</td></tr>
+          <tr><td>Browser with DevTools</td><td>Control page and checking the HTTP response in the Network tab</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="iot-h4" id="t1-wiring">Circuit / wiring diagram and pin connections</h4>
+      <p class="iot-body">The onboard LED needs no wiring. If an external LED is used, the circuit below applies.</p>
+      <svg class="iot-diagram" viewBox="0 0 760 190" role="img" aria-label="Wiring: ESP32 GPIO 2 through a 220 ohm resistor to the LED anode, LED cathode to GND">
+        <rect class="hl" x="30" y="25" width="190" height="140" rx="12"/><text x="125" y="55" text-anchor="middle">ESP32</text>
+        <text class="sm" x="205" y="92" text-anchor="end">GPIO 2</text><text class="sm" x="205" y="132" text-anchor="end">GND</text>
+        <path class="wr" d="M220 88 H330"/>
+        <rect class="b" x="330" y="74" width="90" height="28" rx="4"/><text x="375" y="93" text-anchor="middle">220 Ω</text>
+        <path class="wr" d="M420 88 H500"/>
+        <path class="wr" d="M500 68 L540 88 L500 108 Z"/><line class="wr" x1="540" y1="66" x2="540" y2="110"/>
+        <path class="wr" d="M540 88 H620 V128 H220"/>
+        <text class="sm" x="520" y="58" text-anchor="middle">LED (anode → cathode)</text>
+        <text class="sm" x="420" y="148" text-anchor="middle">return to GND</text>
+      </svg>
+      <p class="week-photo-caption iot-cap">External LED circuit (onboard LED is already connected to GPIO 2)</p>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>ESP32 pin</th><th>Connected to</th><th>Function</th></tr></thead>
+        <tbody>
+          <tr><td>GPIO 2</td><td>LED (via 220 Ω resistor, or the onboard LED)</td><td>Digital output, HIGH = ON</td></tr>
+          <tr><td>GND</td><td>LED cathode</td><td>Common ground</td></tr>
+          <tr><td>USB</td><td>Laptop</td><td>5V power and serial upload</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="iot-h4" id="t1-code">Complete source code (Arduino / ESP32)</h4>
+<pre class="iot-code"><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+const char* ssid     = "YOUR_WIFI_NAME";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+const int LED_PIN = 2;          // onboard LED
+bool ledState = false;
+
+WebServer server(80);           // HTTP server on port 80
+
+// Builds the HTML page. The status text changes with the LED state.
+String buildPage() {
+  String s = "&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name='viewport' content='width=device-width,initial-scale=1'&gt;";
+  s += "&lt;title&gt;ESP32 LED Control&lt;/title&gt;&lt;style&gt;";
+  s += "body{font-family:Arial;text-align:center;margin-top:50px}";
+  s += ".btn{display:inline-block;padding:16px 40px;margin:10px;font-size:20px;color:#fff;text-decoration:none;border-radius:8px}";
+  s += ".on{background:#16a34a}.off{background:#dc2626}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;";
+  s += "&lt;h1&gt;ESP32 LED Control&lt;/h1&gt;";
+  s += "&lt;p&gt;LED Status: &lt;b&gt;" + String(ledState ? "ON" : "OFF") + "&lt;/b&gt;&lt;/p&gt;";
+  s += "&lt;a class='btn on' href='/on'&gt;ON&lt;/a&gt;&lt;a class='btn off' href='/off'&gt;OFF&lt;/a&gt;";
+  s += "&lt;/body&gt;&lt;/html&gt;";
+  return s;
+}
+
+void handleRoot() { server.send(200, "text/html", buildPage()); }
+
+void handleOn() {
+  ledState = true;
+  digitalWrite(LED_PIN, HIGH);
+  Serial.println("LED ON");
+  server.send(200, "text/html", buildPage());
+}
+
+void handleOff() {
+  ledState = false;
+  digitalWrite(LED_PIN, LOW);
+  Serial.println("LED OFF");
+  server.send(200, "text/html", buildPage());
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
+  Serial.println("\nWi-Fi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/",    handleRoot);
+  server.on("/on",  handleOn);
+  server.on("/off", handleOff);
+  server.begin();
+  Serial.println("Web server started");
+}
+
+void loop() {
+  server.handleClient();        // check for new browser requests
+}</code></pre>
+      <h5 class="iot-h5">What the important parts do</h5>
+      <ul class="repo-list">
+        <li><code>WebServer server(80)</code> creates the HTTP server on port 80.</li>
+        <li><code>server.on("/on", handleOn)</code> maps a URL path to a function. This is the routing table.</li>
+        <li><code>digitalWrite(LED_PIN, HIGH/LOW)</code> is the only line that touches the hardware.</li>
+        <li><code>server.handleClient()</code> in <code>loop()</code> must run continuously, otherwise requests are never processed.</li>
+      </ul>
+      <figure class="week-photo-figure" style="margin:20px 0 24px;">
         <img src="assets/task1-photo1.jpeg" alt="Arduino sketch for LED OFF handler and Serial Monitor confirming Wi-Fi connection and web server start">
-        <figcaption class="week-photo-caption">Arduino IDE sketch (LED OFF handler) and Serial Monitor confirming Wi-Fi connection, assigned IP address, and the web server starting successfully</figcaption>
+        <figcaption class="week-photo-caption">Arduino IDE sketch (LED OFF handler) and Serial Monitor confirming Wi-Fi connection, the assigned IP address and the server starting</figcaption>
       </figure>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Testing the control page in the browser</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        With the board's IP address in hand, I opened it in a browser and got a clean "ESP32 LED Control" page with ON and OFF buttons and a live status indicator. Clicking ON sent a GET request to <code>/on</code>, which the DevTools Network tab confirmed came back with a <strong>200 OK</strong> response — the ESP32 had received the request, switched the LED, and served the updated page back. Clicking OFF worked the same way through the <code>/off</code> route.
-      </p>
+      <h4 class="iot-h4" id="t1-html">HTML interface and how it sends commands to the ESP32</h4>
+      <p class="iot-body">The page is plain HTML returned by <code>buildPage()</code>. It contains a heading, a status line and two links styled as buttons. No JavaScript is needed. Each button is an <code>&lt;a href="/on"&gt;</code> or <code>&lt;a href="/off"&gt;</code> link, so clicking it makes the browser send an <strong>HTTP GET</strong> request to that path on the ESP32.</p>
+      <div class="iot-note"><b>Command flow.</b> Click ON → browser sends <code>GET /on</code> → ESP32 runs <code>handleOn()</code> → pin 2 goes HIGH → ESP32 replies <code>200 OK</code> with a new page showing "LED Status: ON".</div>
+<pre class="iot-code"><code>&lt;h1&gt;ESP32 LED Control&lt;/h1&gt;
+&lt;p&gt;LED Status: &lt;b&gt;ON&lt;/b&gt;&lt;/p&gt;
+&lt;a class="btn on"  href="/on"&gt;ON&lt;/a&gt;     &lt;!-- sends GET /on  --&gt;
+&lt;a class="btn off" href="/off"&gt;OFF&lt;/a&gt;   &lt;!-- sends GET /off --&gt;</code></pre>
+
+      <h4 class="iot-h4" id="t1-demo">Screenshots, photographs and demo video</h4>
+      <h5 class="iot-h5">Web interface screenshots</h5>
       <div class="week-photo-grid" style="margin-bottom:24px;">
         <figure class="week-photo-grid-item">
           <img src="assets/task1-photo2.jpeg" alt="Browser showing LED Status ON with a 200 OK network response for the /on request">
-          <figcaption class="week-photo-caption">LED Status: ON — the /on request returns a 200 OK response in the Network tab</figcaption>
+          <figcaption class="week-photo-caption">LED Status: ON — the /on request returns 200 OK in the Network tab</figcaption>
         </figure>
         <figure class="week-photo-grid-item">
           <img src="assets/task1-photo3.jpeg" alt="Browser showing LED Status OFF after the /off request">
-          <figcaption class="week-photo-caption">LED Status: OFF — the page updates instantly after the /off request</figcaption>
+          <figcaption class="week-photo-caption">LED Status: OFF — the page updates after the /off request</figcaption>
         </figure>
       </div>
-
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Verifying it on the actual hardware</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        The last step was confirming the browser control was actually driving the physical board and not just updating a webpage. Pressing ON on the page lit up the ESP32's onboard LED in real time, and pressing OFF turned it off immediately — confirming the full loop from browser click → HTTP request → ESP32 → physical LED was working end to end.
-      </p>
+      <h5 class="iot-h5">Physical setup</h5>
       <div class="week-photo-grid" style="margin-bottom:24px;">
         <figure class="week-photo-grid-item">
           <img src="assets/task1-photo4.jpeg" alt="Physical ESP32 board with LED lit, browser control page showing ON pressed">
-          <figcaption class="week-photo-caption">ON pressed on the web page — the ESP32's onboard LED lights up in real time</figcaption>
+          <figcaption class="week-photo-caption">ON pressed on the page — the ESP32 LED lights up</figcaption>
         </figure>
         <figure class="week-photo-grid-item">
           <img src="assets/task1-photo5.jpeg" alt="Physical ESP32 board with LED off, browser control page showing OFF pressed">
-          <figcaption class="week-photo-caption">OFF pressed on the web page — the LED switches off immediately</figcaption>
+          <figcaption class="week-photo-caption">OFF pressed on the page — the LED switches off</figcaption>
         </figure>
       </div>
-
-      <div class="week-video-wrap">
+      <h5 class="iot-h5">Demo video: LED ON/OFF from the webpage</h5>
+      <div class="week-video-wrap iot-demo">
         <video controls preload="metadata" playsinline class="week-local-video" title="Full demo of the ESP32 LED web server working end to end">
           <source src="assets/task1-video.mp4" type="video/mp4">
           Your browser does not support the video element.
         </video>
       </div>
-      <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:6px;">Full demo — controlling the ESP32's LED live from the web server page</figcaption>
+      <p class="week-photo-caption iot-cap">Full demo — controlling the ESP32 LED live from the web server page</p>
 
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
-        <strong>Result:</strong> a working Wi-Fi web server hosted entirely on the ESP32 itself, controlling a physical LED through a clean browser interface with no external app or cloud service involved.
-      </p>
+      <h4 class="iot-h4" id="t1-problems">Problems encountered and solutions</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Problem</th><th>Cause</th><th>Solution</th></tr></thead>
+        <tbody>
+          <tr><td>Board stayed on "Connecting…" dots</td><td>Wrong SSID/password, or a 5 GHz network (ESP32 supports 2.4 GHz only)</td><td>Rechecked credentials and connected to the 2.4 GHz network</td></tr>
+          <tr><td>Page would not open in the browser</td><td>Laptop and ESP32 were on different networks; IP read from an old session</td><td>Read the IP from the Serial Monitor after every reset and used the same network</td></tr>
+          <tr><td>Upload failed with a connection error</td><td>Wrong board/port selected</td><td>Selected the ESP32 Dev Module and the correct COM port</td></tr>
+          <tr><td>Status text lagged behind the LED</td><td>Page was built before the state variable updated</td><td>Updated <code>ledState</code> first, then built the response page</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="iot-h4" id="t1-reflect">Reflection</h4>
+      <div class="reflection-block">
+        <div class="reflection-label">What I learned</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">A microcontroller can act as a web server, and a URL path can be treated as a command. This task made HTTP concrete for me: the 200 OK in the Network tab was the confirmation that the whole chain worked. The limitation is also clear. The page only works on the local network, which is why Task 2 moves control to the cloud.</p>
+      </div>
+      <p class="iot-body" style="margin-top:16px;"><strong>Result:</strong> a working Wi-Fi web server hosted on the ESP32 that controls a physical LED from a browser, with no external app or cloud service.</p>
+
+      <div class="repo-box">
+        <span class="repo-box-label">Repository</span>
+        <p class="repo-box-desc">Access the source code and documentation for Task 1 — the ESP32 web server sketch, HTML interface, screenshots and the demo video.</p>
+        <a class="repo-box-btn" href="https://github.com/akshayam1207-oss/ESP32-Web-Server-LED-Control.git" target="_blank" rel="noopener">View GitHub Repository ↗</a>
+      </div>
     </div>
 
-    <!-- ============================================
-         TASK 2 — MQTT / ADAFRUIT IO DASHBOARD
-         ============================================ -->
+    <!-- =====================================================
+         TASK 2
+         ===================================================== -->
     <div class="card-cool" id="task2" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 2</span>
-      <h3 class="modal-title" style="margin-top:12px;">MQTT + Adafruit IO — LED & Relay-Controlled 230V Bulb</h3>
+      <h3 class="modal-title" style="margin-top:12px;">Adafruit IO Dashboard & MQTT — LED and Relay-Controlled 230V Bulb</h3>
 
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
-        This task went a step further than Task 1: instead of a page hosted locally on the ESP32, the ESP32 would connect over MQTT to <strong>Adafruit IO</strong>, so the device could be switched on and off from a live dashboard from anywhere, and would eventually control a real 230V bulb through a relay rather than a small onboard LED.
-      </p>
+      <ul class="iot-toc">
+        <li><a href="#t2-concept">Concepts</a></li><li><a href="#t2-roles">MQTT roles</a></li><li><a href="#t2-hw">Hardware & software</a></li>
+        <li><a href="#t2-setup">Adafruit IO setup</a></li><li><a href="#t2-flow">Data flow</a></li><li><a href="#t2-code">Code</a></li>
+        <li><a href="#t2-hwbuild">Hardware build</a></li><li><a href="#t2-demo">Demo</a></li><li><a href="#t2-problems">Problems</a></li><li><a href="#t2-reflect">Reflection</a></li>
+      </ul>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Setting up Adafruit IO and creating a feed</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        I created an Adafruit IO account and set up a new feed named <strong>LED</strong>, which acts as the channel the ESP32 publishes to and subscribes from over MQTT. Every time the LED's state changed, the feed recorded a new data point — the feed history shows over 150 recorded values, confirming the ESP32 was talking to Adafruit IO reliably.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
+      <h4 class="iot-h4" id="t2-concept" style="margin-top:0">Purpose of Adafruit IO and the basic concept of MQTT</h4>
+      <p class="iot-body"><strong>Adafruit IO</strong> is a cloud IoT platform. In an IoT system it provides three things the ESP32 cannot: a <em>broker</em> that relays messages, <em>storage</em> for the history of values, and a <em>dashboard</em> with ready-made controls such as toggles and gauges. Because it lives on the internet, the device can be controlled from anywhere, not only from the local network used in Task 1.</p>
+      <p class="iot-body"><strong>MQTT</strong> (Message Queuing Telemetry Transport) is a lightweight publish/subscribe protocol designed for small devices and unreliable networks. Instead of talking directly, devices send messages to a central <strong>broker</strong> under a named <strong>topic</strong>. Any device that has <em>subscribed</em> to that topic receives the message. The sender does not need to know who is listening.</p>
+
+      <h4 class="iot-h4" id="t2-roles">MQTT publisher, subscriber, broker and topic/feed</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>MQTT role</th><th>In this project</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Publisher</strong></td><td>The Adafruit IO dashboard toggle publishes <code>1</code> or <code>0</code>. (In Task 3 the IFTTT applet is also a publisher. The ESP32 publishes too when it reports state.)</td></tr>
+          <tr><td><strong>Subscriber</strong></td><td>The ESP32, subscribed to the LED feed, receives each new value</td></tr>
+          <tr><td><strong>Broker</strong></td><td>Adafruit IO's MQTT server (<code>io.adafruit.com</code>, port 1883, or 8883 with TLS)</td></tr>
+          <tr><td><strong>Topic / Feed</strong></td><td>The feed named <code>LED</code>, which maps to the MQTT topic <code>&lt;username&gt;/feeds/led</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="iot-note"><b>Role of the topic/feed.</b> The feed is the shared mailbox. It decouples the sender from the receiver, stores every value with a timestamp (the history graph) and is the single name that the dashboard, the ESP32 and, later, IFTTT all agree on.</div>
+
+      <h4 class="iot-h4" id="t2-hw">Hardware and software used</h4>
+      <div class="iot-two">
+        <div><h5 class="iot-h5" style="margin-top:0">Hardware</h5>
+          <ul class="repo-list"><li>ESP32 development board</li><li>Onboard LED / external LED + 220 Ω resistor</li><li>5V single-channel relay module</li><li>230V AC bulb and bulb holder</li><li>Wires, soldering iron, solder, hot glue</li></ul></div>
+        <div><h5 class="iot-h5" style="margin-top:0">Software</h5>
+          <ul class="repo-list"><li>Arduino IDE + ESP32 board package</li><li>Adafruit IO Arduino library and Adafruit MQTT library</li><li>Adafruit IO account (free tier)</li><li>Serial Monitor at 115200 baud</li></ul></div>
+      </div>
+
+      <h4 class="iot-h4" id="t2-setup">Adafruit IO account, feed and dashboard configuration</h4>
+      <ol class="repo-list">
+        <li><strong>Account:</strong> created a free account at io.adafruit.com. The username and the <strong>AIO Key</strong> (found under "My Key") are the credentials the ESP32 uses to log in to the broker.</li>
+        <li><strong>Feed:</strong> created a feed called <strong>LED</strong> under Feeds → New Feed. The feed history later showed more than 150 stored values.</li>
+        <li><strong>Dashboard:</strong> created a dashboard named "Home automation" and added a <strong>Toggle</strong> block connected to the LED feed with button text "Toggle It!!", <em>On value = 1</em> and <em>Off value = 0</em>.</li>
+      </ol>
+      <div class="week-photo-grid" style="margin:16px 0 24px;">
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo1.jpeg" alt="Adafruit IO Feeds page showing the newly created LED feed">
           <figcaption class="week-photo-caption">Creating the LED feed on Adafruit IO</figcaption>
         </figure>
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo2.jpeg" alt="Adafruit IO feed history graph showing over 150 recorded on/off data points">
-          <figcaption class="week-photo-caption">Feed history — over 150 on/off data points recorded from the ESP32</figcaption>
+          <figcaption class="week-photo-caption">Feed history — over 150 on/off values recorded</figcaption>
         </figure>
-      </div>
-
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Building the dashboard control</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        Next, I built a dashboard block on top of the LED feed — a toggle switch labelled "Toggle It!!" that sends a value of <code>1</code> when switched ON and <code>0</code> when switched OFF. This gave me a live, always-available control panel: flipping the toggle publishes a new value to the feed instantly, which the ESP32 picks up over MQTT.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo3.jpeg" alt="Configuring the Toggle It dashboard block with On/Off text and values">
-          <figcaption class="week-photo-caption">Configuring the toggle block — On value 1, Off value 0</figcaption>
+          <figcaption class="week-photo-caption">Toggle block configuration — On value 1, Off value 0</figcaption>
         </figure>
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo4.jpeg" alt="Live Adafruit IO dashboard titled Home automation with the toggle switch">
-          <figcaption class="week-photo-caption">The finished live dashboard — "Home automation!!!" with the toggle switch</figcaption>
+          <figcaption class="week-photo-caption">The finished "Home automation" dashboard</figcaption>
         </figure>
       </div>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Moving from an LED to a real 230V bulb via relay</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        Once the dashboard was reliably switching the LED, I moved to the actual objective — controlling a real 230V bulb through a relay module, since the ESP32 can't switch mains voltage directly. This meant opening up a bulb holder, soldering the live and neutral wires to the relay's switching terminals, and wiring the relay's control pins to the ESP32.
-      </p>
+      <h4 class="iot-h4" id="t2-flow">Communication flow and feed structure</h4>
+      <svg class="iot-diagram" viewBox="0 0 760 170" role="img" aria-label="Dashboard publishes to the Adafruit IO broker on the LED feed; ESP32 subscribes and drives the relay and bulb">
+        <rect class="b" x="10" y="50" width="140" height="64" rx="10"/><text x="80" y="78" text-anchor="middle">Dashboard</text><text class="sm" x="80" y="96" text-anchor="middle">Publisher</text>
+        <rect class="hl" x="215" y="50" width="170" height="64" rx="10"/><text x="300" y="78" text-anchor="middle">Adafruit IO</text><text class="sm" x="300" y="96" text-anchor="middle">Broker · feed "LED"</text>
+        <rect class="b" x="450" y="50" width="130" height="64" rx="10"/><text x="515" y="78" text-anchor="middle">ESP32</text><text class="sm" x="515" y="96" text-anchor="middle">Subscriber</text>
+        <rect class="b" x="640" y="20" width="110" height="44" rx="10"/><text x="695" y="47" text-anchor="middle">Relay</text>
+        <rect class="b" x="640" y="104" width="110" height="44" rx="10"/><text x="695" y="131" text-anchor="middle">230V bulb</text>
+        <line x1="150" y1="82" x2="215" y2="82"/><line x1="385" y1="82" x2="450" y2="82"/><line x1="580" y1="82" x2="610" y2="82"/><path d="M610 42 V126 M610 42 H640 M610 126 H640"/>
+        <text class="sm" x="182" y="74" text-anchor="middle">publish 1/0</text><text class="sm" x="418" y="74" text-anchor="middle">deliver</text>
+      </svg>
+      <p class="week-photo-caption iot-cap">Task 2 data flow: dashboard → broker → ESP32 → relay → bulb</p>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Item</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Feed name / key</td><td><code>LED</code> / <code>led</code></td></tr>
+          <tr><td>MQTT topic</td><td><code>&lt;AIO_USERNAME&gt;/feeds/led</code></td></tr>
+          <tr><td>Payload</td><td><code>1</code> = ON, <code>0</code> = OFF</td></tr>
+          <tr><td>Broker</td><td><code>io.adafruit.com</code>, port 1883 (8883 TLS)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="iot-h4" id="t2-code">Complete ESP32 source code</h4>
+      <p class="iot-body">This sketch is also used unchanged in Task 3. Credentials are placed in the sketch for the lab demo. They must never be pushed to a public repository, so use placeholders as shown.</p>
+<pre class="iot-code"><code>// ---- Config ----
+#define IO_USERNAME  "YOUR_AIO_USERNAME"
+#define IO_KEY       "YOUR_AIO_KEY"
+#define WIFI_SSID    "YOUR_WIFI_NAME"
+#define WIFI_PASS    "YOUR_WIFI_PASSWORD"
+
+#include "AdafruitIO_WiFi.h"
+AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
+
+// Feed "LED" = MQTT topic IO_USERNAME/feeds/led
+AdafruitIO_Feed *ledFeed = io.feed("LED");
+
+const int RELAY_PIN = 26;     // relay IN pin
+const int LED_PIN   = 2;      // onboard LED
+
+// Called every time a new value arrives on the feed
+void handleRelay(AdafruitIO_Data *data) {
+  int value = data-&gt;toInt();
+  Serial.print("Adafruit IO value: ");
+  Serial.println(value);
+
+  if (value == 1) {
+    digitalWrite(RELAY_PIN, HIGH);
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Relay ON -&gt; Bulb ON");
+  } else {
+    digitalWrite(RELAY_PIN, LOW);
+    digitalWrite(LED_PIN, LOW);
+    Serial.println("Relay OFF -&gt; Bulb OFF");
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(RELAY_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW);   // start with bulb OFF
+
+  Serial.print("Connecting to Adafruit IO");
+  io.connect();                              // Wi-Fi + MQTT connection
+  ledFeed-&gt;onMessage(handleRelay);           // subscribe + register callback
+  while (io.status() &lt; AIO_CONNECTED) { Serial.print("."); delay(500); }
+  Serial.println();
+  Serial.println(io.statusText());
+  ledFeed-&gt;get();                            // ask for the last stored value
+}
+
+void loop() {
+  io.run();   // keeps MQTT alive and processes incoming messages
+}</code></pre>
+      <h5 class="iot-h5">Explanation of the important code sections</h5>
+      <ul class="repo-list">
+        <li><strong><code>AdafruitIO_WiFi io(...)</code></strong> holds the username, key and Wi-Fi details, so one object manages both the Wi-Fi and MQTT connection.</li>
+        <li><strong><code>io.feed("LED")</code></strong> links the sketch to the feed, which is the MQTT topic.</li>
+        <li><strong><code>onMessage(handleRelay)</code></strong> subscribes to the feed. The function runs automatically whenever the broker delivers a value.</li>
+        <li><strong><code>handleRelay()</code></strong> converts the payload to an integer and writes the relay pin HIGH for 1 and LOW otherwise. Serial logs record every change.</li>
+        <li><strong><code>io.run()</code></strong> must be called constantly in <code>loop()</code>. Without it the connection drops and no messages arrive. Avoid long <code>delay()</code> calls here.</li>
+      </ul>
+
+      <h4 class="iot-h4" id="t2-hwbuild">Hardware setup: LED first, then the relay-switched 230V bulb</h4>
+      <p class="iot-body">The ESP32 cannot switch mains voltage, so a relay is used as an electrically isolated switch. The ESP32 drives the relay's low-voltage input, and the relay's contacts open or close the live wire to the bulb.</p>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>ESP32</th><th>Relay module</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>GPIO 26</td><td>IN</td><td>Control signal, HIGH = relay ON</td></tr>
+          <tr><td>VIN (5V)</td><td>VCC</td><td>Relay coil power</td></tr>
+          <tr><td>GND</td><td>GND</td><td>Common ground</td></tr>
+          <tr><td>—</td><td>COM / NO</td><td>In series with the live wire to the bulb holder; neutral goes directly to the holder</td></tr>
+        </tbody>
+      </table></div>
+      <div class="iot-note"><b>Safety.</b> 230V AC can be fatal. The wiring was done with the mains unplugged, the joints were insulated with hot glue, and the supply was connected only after the low-voltage side had been tested.</div>
       <figure class="week-photo-figure" style="margin:0 0 24px;">
         <img src="assets/task2-photo5.jpeg" alt="Soldering the bulb holder wires onto the relay module terminals">
-        <figcaption class="week-photo-caption">Soldering the bulb holder's live and neutral wires onto the relay module</figcaption>
+        <figcaption class="week-photo-caption">Soldering the bulb holder's live and neutral wires to the relay module</figcaption>
       </figure>
-
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        On the software side, I wrote a <code>handleRelay()</code> function that reads the incoming value from the Adafruit IO feed and drives the relay pin accordingly — writing it HIGH to turn the relay (and bulb) ON when the feed value is <code>1</code>, and LOW to turn it OFF otherwise, with Serial print statements logging every state change for debugging.
-      </p>
       <figure class="week-photo-figure" style="margin:0 0 24px;">
         <img src="assets/task2-photo6.jpeg" alt="Arduino IDE code for the handleRelay function compiling">
-        <figcaption class="week-photo-caption">handleRelay() function — reading the Adafruit IO feed value and switching the relay pin accordingly</figcaption>
+        <figcaption class="week-photo-caption">handleRelay() reading the feed value and switching the relay pin</figcaption>
       </figure>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — The mistake: a loose connection, and having to redo it</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        When I first connected everything — ESP32, relay, and bulb holder — the toggle on the dashboard wasn't reliably switching the bulb. After checking the code and confirming the Adafruit IO values were arriving correctly on the Serial Monitor, I traced the problem back to the hardware: one of my soldered joints on the relay wasn't making a proper connection, so the relay was only intermittently receiving power from the wiring.
-      </p>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        I had to desolder and redo that connection — cleaning the joint, re-tinning the wire, and soldering it again more carefully this time, making sure it was mechanically secure before covering it with hot glue for insulation and strain relief.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
-        <figure class="week-photo-grid-item">
-          <img src="assets/task2-photo7.jpeg" alt="Initial ESP32, relay, and bulb wiring setup where the connection was unreliable">
-          <figcaption class="week-photo-caption">The initial wiring — this was where the loose joint was causing the unreliable switching</figcaption>
-        </figure>
-        <figure class="week-photo-grid-item">
-          <img src="assets/task2-photo8.jpeg" alt="Re-soldering the relay connection to fix the loose joint">
-          <figcaption class="week-photo-caption">Re-soldering the joint — cleaning, re-tinning, and securing the connection properly</figcaption>
-        </figure>
-      </div>
-
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Success: the bulb responding correctly to the dashboard</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        After fixing the connection, the Serial Monitor showed clean, consistent logs every time the dashboard toggle was flipped — <code>Adafruit IO value: 1 → Relay ON → Bulb ON</code> and <code>Adafruit IO value: 0 → Relay OFF → Bulb OFF</code> — and the bulb itself switched reliably in real time from the live dashboard, exactly as intended.
-      </p>
+      <h4 class="iot-h4" id="t2-demo">Hardware photographs, dashboard control and demo videos</h4>
       <div class="week-photo-grid" style="margin-bottom:24px;">
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo9.jpeg" alt="Final working setup with the bulb lit and clean Serial Monitor logs showing correct relay switching">
-          <figcaption class="week-photo-caption">Bulb lit and Serial Monitor showing clean Relay ON / Bulb ON logs after the fix</figcaption>
+          <figcaption class="week-photo-caption">Bulb lit; Serial Monitor shows Relay ON / Bulb ON</figcaption>
         </figure>
         <figure class="week-photo-grid-item">
           <img src="assets/task2-photo10.jpeg" alt="Close-up of the final ESP32, relay, and bulb setup working correctly">
-          <figcaption class="week-photo-caption">The final ESP32 + relay + bulb setup, fully functional</figcaption>
+          <figcaption class="week-photo-caption">Final ESP32 + relay + bulb setup</figcaption>
         </figure>
       </div>
-
       <figure class="week-photo-figure" style="margin:0 0 24px;">
         <img src="assets/task2-photo11.jpeg" alt="Working on the ESP32 and Adafruit IO setup during the lab session">
-        <figcaption class="week-photo-caption">Working through the setup and debugging live during the lab session</figcaption>
+        <figcaption class="week-photo-caption">Setting up and debugging live during the lab session</figcaption>
       </figure>
-
       <div class="week-photo-grid" style="margin-bottom:6px;">
         <div>
           <div class="week-video-wrap">
@@ -221,7 +487,7 @@
               Your browser does not support the video element.
             </video>
           </div>
-          <figcaption class="week-photo-caption" style="text-align:center;">Dashboard toggle switching the relay-controlled bulb ON and OFF</figcaption>
+          <p class="week-photo-caption iot-cap">Demo 1 — dashboard toggle switching the bulb ON and OFF</p>
         </div>
         <div>
           <div class="week-video-wrap">
@@ -230,131 +496,202 @@
               Your browser does not support the video element.
             </video>
           </div>
-          <figcaption class="week-photo-caption" style="text-align:center;">Final confirmation — the bulb responding correctly to every toggle</figcaption>
+          <p class="week-photo-caption iot-cap">Demo 2 — final confirmation after the fix</p>
         </div>
       </div>
 
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
-        <strong>Result:</strong> a real 230V bulb controlled reliably over MQTT from a live Adafruit IO dashboard, through a relay driven by the ESP32 — and a hardware debugging lesson along the way: when software logic looks correct but behaviour is inconsistent, the problem is often a physical connection, not the code.
-      </p>
+      <h4 class="iot-h4" id="t2-problems">Problems encountered and solutions implemented</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Problem</th><th>Diagnosis</th><th>Solution</th></tr></thead>
+        <tbody>
+          <tr><td>Bulb switched unreliably from the dashboard</td><td>Serial Monitor showed correct values arriving, so the code and MQTT were fine. The fault was a poorly soldered joint on the relay</td><td>Desoldered, cleaned and re-tinned the joint, soldered it again securely, then added hot glue for insulation and strain relief</td></tr>
+          <tr><td>ESP32 stuck while connecting to Adafruit IO</td><td>Wrong username/key or 5 GHz Wi-Fi</td><td>Copied the key again from "My Key" and used a 2.4 GHz network</td></tr>
+          <tr><td>Feed name mismatch</td><td>Feed key in code must match the feed key on the dashboard</td><td>Used the exact feed name <code>LED</code> in both places</td></tr>
+          <tr><td>Relay state wrong after reboot</td><td>Pin floating at startup</td><td>Set the pin LOW in <code>setup()</code> and called <code>ledFeed-&gt;get()</code> to resync with the last value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo7.jpeg" alt="Initial ESP32, relay, and bulb wiring setup where the connection was unreliable">
+          <figcaption class="week-photo-caption">Initial wiring — the loose joint caused the unreliable switching</figcaption>
+        </figure>
+        <figure class="week-photo-grid-item">
+          <img src="assets/task2-photo8.jpeg" alt="Re-soldering the relay connection to fix the loose joint">
+          <figcaption class="week-photo-caption">Re-soldering the joint properly</figcaption>
+        </figure>
+      </div>
+
+      <h4 class="iot-h4" id="t2-reflect">Reflection</h4>
+      <div class="reflection-block">
+        <div class="reflection-label">What I learned</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">Publish/subscribe separates the sender from the receiver, so the dashboard and the ESP32 never need to know about each other. The feed is the contract between them. The most useful lesson was debugging: when the logs are correct but the behaviour is not, check the hardware first.</p>
+      </div>
+      <p class="iot-body" style="margin-top:16px;"><strong>Result:</strong> a 230V bulb and an LED controlled reliably over MQTT from a live Adafruit IO dashboard through a relay driven by the ESP32.</p>
+
+      <div class="repo-box">
+        <span class="repo-box-label">Repository</span>
+        <p class="repo-box-desc">Access the source code and documentation for Task 2 — the MQTT/Adafruit IO relay sketch, dashboard and feed screenshots, wiring photos and demo videos.</p>
+        <a class="repo-box-btn" href="https://github.com/akshayam1207-oss/Adafruit-IO-MQTT-LED-Relay-Control.git" target="_blank" rel="noopener">View GitHub Repository ↗</a>
+      </div>
     </div>
 
-    <!-- ============================================
-         TASK 3 — VOICE CONTROL VIA IFTTT + GOOGLE ASSISTANT
-         ============================================ -->
+    <!-- =====================================================
+         TASK 3
+         ===================================================== -->
     <div class="card-cool" id="task3" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
       <span class="modal-week">Task 3</span>
-      <h3 class="modal-title" style="margin-top:12px;">Voice Control On/Off — IFTTT & Google Assistant</h3>
+      <h3 class="modal-title" style="margin-top:12px;">IFTTT + Adafruit IO — Voice-Controlled IoT Automation</h3>
 
-      <p style="color:var(--ink-soft);font-size:0.96rem;line-height:1.75;margin-bottom:18px;">
-        The goal of this task was to control the same relay-switched 230V bulb from Task 2 using nothing but voice — saying a phrase to Google Assistant instead of tapping a toggle on a dashboard. <strong>IFTTT</strong> (If This Then That) was the bridge that connected a spoken Google Assistant command to the Adafruit IO feed the ESP32 was already listening to.
-      </p>
+      <ul class="iot-toc">
+        <li><a href="#t3-obj">Objective</a></li><li><a href="#t3-concept">Concepts</a></li><li><a href="#t3-hw">Hardware & software</a></li>
+        <li><a href="#t3-applet">Applets</a></li><li><a href="#t3-flow">Data flow</a></li><li><a href="#t3-code">Code</a></li>
+        <li><a href="#t3-proof">Screenshots & photos</a></li><li><a href="#t3-tests">Testing</a></li><li><a href="#t3-problems">Problems</a></li><li><a href="#t3-reflect">Learnings</a></li>
+      </ul>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 1 — Starting a new applet and choosing Google Assistant as the trigger</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        On IFTTT, I created a new applet using the classic "If This → Then That" format. For the "If This" trigger service, I searched for and selected <strong>Google Assistant</strong>, which lets a spoken phrase to the Assistant kick off an automation.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo1.jpeg" alt="IFTTT Create page showing the If This and Then That blocks">
-          <figcaption class="week-photo-caption">Starting a new applet on IFTTT — the If This / Then That structure</figcaption>
-        </figure>
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo2.jpeg" alt="IFTTT Choose a trigger page with Google Assistant selected">
-          <figcaption class="week-photo-caption">Selecting Google Assistant as the trigger service</figcaption>
-        </figure>
+      <h4 class="iot-h4" id="t3-obj" style="margin-top:0">Objective of the IoT automation</h4>
+      <p class="iot-body">The objective was to control the same relay-switched 230V bulb from Task 2 by voice only. Saying "Ok Google, activate lights on" or "lights off" should switch the bulb, with no dashboard, button or physical switch. The goal was to add a new input method without changing the ESP32 hardware or code.</p>
+
+      <h4 class="iot-h4" id="t3-concept">Concepts: IoT automation, IFTTT and trigger → action</h4>
+      <p class="iot-body"><strong>IoT automation</strong> means a system reacts to an event by itself, without a person operating each device. Here the event is a spoken phrase, and the reaction is a change in a physical device.</p>
+      <p class="iot-body"><strong>IFTTT (If This Then That)</strong> is a no-code service that connects different online services. It was used because it already has a Google Assistant integration and an Adafruit IO integration, so I did not have to write or host any voice-assistant code.</p>
+      <div class="iot-note"><b>Trigger → Action.</b> Every IFTTT applet has an <b>If This</b> part (the trigger, an event that happens) and a <b>Then That</b> part (the action, what the system does in response). Here, trigger = Google Assistant hears "activate lights on"; action = send the value 1 to the Adafruit IO feed.</div>
+      <p class="iot-body"><strong>Role of Adafruit IO:</strong> it is the meeting point. IFTTT writes a value to the LED feed, and Adafruit IO's broker delivers it to the subscribed ESP32. The ESP32 cannot receive anything directly from IFTTT, so the feed acts as the bridge between the cloud service and the device.</p>
+
+      <h4 class="iot-h4" id="t3-hw">Hardware and software used</h4>
+      <div class="iot-two">
+        <div><h5 class="iot-h5" style="margin-top:0">Hardware</h5>
+          <ul class="repo-list"><li>ESP32 board (same as Task 2)</li><li>5V relay module</li><li>230V bulb and holder</li><li>Phone with Google Assistant</li></ul></div>
+        <div><h5 class="iot-h5" style="margin-top:0">Software / services</h5>
+          <ul class="repo-list"><li>IFTTT account (two applets)</li><li>Google Assistant</li><li>Adafruit IO feed "LED"</li><li>Arduino IDE, Serial Monitor</li></ul></div>
       </div>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 2 — Setting up the "lights on" and "lights off" voice phrases</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        For the trigger type, I chose <strong>"Activate scene,"</strong> which fires whenever I say "Ok Google, activate [scene name]." Since I needed two separate voice commands — one to turn the bulb on and one to turn it off — I set up two applets in parallel: one with the scene name <strong>"lights on"</strong> and another with the scene name <strong>"lights off."</strong>
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo3.jpeg" alt="IFTTT Complete trigger fields with scene name set to lights on">
-          <figcaption class="week-photo-caption">Trigger fields for the "lights on" scene</figcaption>
-        </figure>
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo4.jpeg" alt="IFTTT Edit trigger fields with scene name set to lights off">
-          <figcaption class="week-photo-caption">Trigger fields for the "lights off" scene</figcaption>
-        </figure>
-      </div>
+      <h4 class="iot-h4" id="t3-applet">IFTTT applet, trigger and action</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th></th><th>Applet 1 — lights on</th><th>Applet 2 — lights off</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Trigger (If This)</strong></td><td>Google Assistant → Activate scene → <em>"lights on"</em></td><td>Google Assistant → Activate scene → <em>"lights off"</em></td></tr>
+          <tr><td><strong>Action (Then That)</strong></td><td>Adafruit IO → Send data to feed <code>LED</code></td><td>Adafruit IO → Send data to feed <code>LED</code></td></tr>
+          <tr><td><strong>Data sent</strong></td><td><code>1</code></td><td><code>0</code></td></tr>
+          <tr><td><strong>Voice command</strong></td><td>"Ok Google, activate lights on"</td><td>"Ok Google, activate lights off"</td></tr>
+        </tbody>
+      </table></div>
+      <h5 class="iot-h5">How each applet was built</h5>
+      <ol class="repo-list">
+        <li>Created a new applet and selected <strong>Google Assistant</strong> as the "If This" service.</li>
+        <li>Chose the <strong>Activate scene</strong> trigger and typed the scene name ("lights on" or "lights off").</li>
+        <li>Chose <strong>Adafruit IO → Send data to Adafruit IO</strong> as the "Then That" action, selected the <code>LED</code> feed and entered the value 1 or 0.</li>
+        <li>Saved, connected both accounts and repeated for the second applet.</li>
+      </ol>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 3 — Connecting each trigger to the Adafruit IO LED feed</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        For "Then That," I chose <strong>Adafruit IO</strong> as the action service and selected "Send data to Adafruit IO," pointing both applets at the same <strong>LED</strong> feed the ESP32 was already subscribed to from Task 2. The "lights on" applet was configured to send a value of <code>1</code> to the feed, and the "lights off" applet was configured to send a value of <code>0</code> — reusing the exact same feed and value logic as the dashboard toggle, just triggered by voice instead of a tap.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo5.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights on, then send data to LED feed">
-          <figcaption class="week-photo-caption">Completed applet — "Okay Google, activate lights on" → Send data to LED feed</figcaption>
-        </figure>
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo6.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights off, then send data to LED feed">
-          <figcaption class="week-photo-caption">Completed applet — "Okay Google, activate lights off" → Send data to LED feed</figcaption>
-        </figure>
-      </div>
+      <h4 class="iot-h4" id="t3-flow">How the trigger reaches the IoT system: data-flow diagram</h4>
+      <svg class="iot-diagram" viewBox="0 0 760 150" role="img" aria-label="Voice command to Google Assistant to IFTTT to Adafruit IO feed to ESP32 to relay to bulb">
+        <rect class="b" x="5" y="40" width="95" height="60" rx="10"/><text x="52" y="68" text-anchor="middle">Voice</text><text class="sm" x="52" y="85" text-anchor="middle">"lights on"</text>
+        <rect class="b" x="125" y="40" width="105" height="60" rx="10"/><text x="177" y="68" text-anchor="middle">Google</text><text class="sm" x="177" y="85" text-anchor="middle">Assistant</text>
+        <rect class="b" x="255" y="40" width="95" height="60" rx="10"/><text x="302" y="68" text-anchor="middle">IFTTT</text><text class="sm" x="302" y="85" text-anchor="middle">Trigger→Action</text>
+        <rect class="hl" x="375" y="40" width="115" height="60" rx="10"/><text x="432" y="68" text-anchor="middle">Adafruit IO</text><text class="sm" x="432" y="85" text-anchor="middle">feed "LED"</text>
+        <rect class="b" x="515" y="40" width="85" height="60" rx="10"/><text x="557" y="75" text-anchor="middle">ESP32</text>
+        <rect class="b" x="625" y="40" width="60" height="60" rx="10"/><text x="655" y="75" text-anchor="middle">Relay</text>
+        <rect class="b" x="700" y="40" width="55" height="60" rx="10"/><text x="727" y="75" text-anchor="middle">Bulb</text>
+        <line x1="100" y1="70" x2="125" y2="70"/><line x1="230" y1="70" x2="255" y2="70"/><line x1="350" y1="70" x2="375" y2="70"/><line x1="490" y1="70" x2="515" y2="70"/><line x1="600" y1="70" x2="625" y2="70"/><line x1="685" y1="70" x2="700" y2="70"/>
+        <text class="sm" x="432" y="125" text-anchor="middle">IFTTT publishes 1 / 0 · ESP32 receives it by MQTT subscription</text>
+      </svg>
+      <p class="week-photo-caption iot-cap">Task 3 communication / data-flow diagram</p>
+      <p class="iot-body">Everything after the feed is identical to Task 2. The ESP32 cannot tell whether a value came from the dashboard toggle or from IFTTT, so the same <code>handleRelay()</code> function handles both.</p>
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 4 — Reusing the Task 2 relay hardware and ESP32 code</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        No new wiring was needed here — the same ESP32, relay module, and 230V bulb setup from Task 2 was reused as-is, since the ESP32 was already listening to the LED feed over MQTT using the Adafruit IO library, its Wi-Fi credentials and Adafruit IO username/key defined right at the top of the sketch. Whatever wrote to that feed — a dashboard toggle or an IFTTT applet triggered by voice — the ESP32 couldn't tell the difference, and the same <code>handleRelay()</code> logic from Task 2 switched the relay exactly the same way.
-      </p>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        The Serial Monitor confirmed this clearly: every time an IFTTT applet fired, the feed value changed and the ESP32 logged it instantly — <code>Adafruit IO value: 1 → Relay ON → Bulb ON</code> when "lights on" was triggered, and <code>Adafruit IO value: 0 → Relay OFF → Bulb OFF</code> when "lights off" was triggered.
-      </p>
-      <div class="week-photo-grid" style="margin-bottom:24px;">
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo7.jpeg" alt="Arduino IDE with AdafruitIO_WiFi code and Serial Monitor showing relay and bulb state changes, bulb lit next to the laptop">
-          <figcaption class="week-photo-caption">Serial Monitor confirming the feed value switching the relay and bulb correctly</figcaption>
-        </figure>
-        <figure class="week-photo-grid-item">
-          <img src="assets/task3-photo8.jpeg" alt="Close-up of the ESP32, relay module, and 230V bulb setup reused from Task 2">
-          <figcaption class="week-photo-caption">The same ESP32 + relay + bulb setup from Task 2, now controlled by voice</figcaption>
-        </figure>
-      </div>
+      <h4 class="iot-h4" id="t3-code">ESP32 source code</h4>
+      <p class="iot-body">The sketch is the Task 2 sketch, reused without changes. The part that makes voice control work is the feed subscription and callback:</p>
+<pre class="iot-code"><code>AdafruitIO_Feed *ledFeed = io.feed("LED");   // same feed IFTTT writes to
 
-      <h4 style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:10px;color:var(--ink);">Step 5 — Testing the full voice control loop</h4>
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-        With everything connected, I tested the complete loop using Google Assistant on a phone. Saying <strong>"Ok Google, activate lights on"</strong> triggered the IFTTT applet, which sent a value of 1 to the Adafruit IO feed, which the ESP32 picked up and used to switch the relay — turning the bulb on within a second or two. Saying <strong>"Ok Google, activate lights off"</strong> completed the reverse path and switched the bulb off, with no dashboard, button, or physical switch involved at any point.
-      </p>
+void handleRelay(AdafruitIO_Data *data) {    // runs on every IFTTT or dashboard update
+  int value = data-&gt;toInt();                 // IFTTT sends "1" or "0"
+  Serial.print("Adafruit IO value: "); Serial.println(value);
+  digitalWrite(RELAY_PIN, value == 1 ? HIGH : LOW);
+  Serial.println(value == 1 ? "Relay ON -&gt; Bulb ON" : "Relay OFF -&gt; Bulb OFF");
+}
+
+void setup() {
+  /* Serial, pinMode, io.connect() as in Task 2 */
+  ledFeed-&gt;onMessage(handleRelay);
+}
+void loop() { io.run(); }</code></pre>
+      <p class="iot-body">The full file is <code>task2_task3_mqtt_relay.ino</code>, listed in full under Task 2.</p>
+
+      <h4 class="iot-h4" id="t3-proof">IFTTT configuration, Adafruit IO feed and working prototype</h4>
+      <h5 class="iot-h5">IFTTT configuration screenshots</h5>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo1.jpeg" alt="IFTTT Create page showing the If This and Then That blocks"><figcaption class="week-photo-caption">Starting a new applet: If This / Then That</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo2.jpeg" alt="IFTTT Choose a trigger page with Google Assistant selected"><figcaption class="week-photo-caption">Google Assistant selected as the trigger service</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo3.jpeg" alt="IFTTT Complete trigger fields with scene name set to lights on"><figcaption class="week-photo-caption">Trigger fields — scene "lights on"</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo4.jpeg" alt="IFTTT Edit trigger fields with scene name set to lights off"><figcaption class="week-photo-caption">Trigger fields — scene "lights off"</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo5.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights on, then send data to LED feed"><figcaption class="week-photo-caption">Completed applet — lights on → send 1 to LED feed</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo6.jpeg" alt="Completed IFTTT applet: if you say Okay Google activate lights off, then send data to LED feed"><figcaption class="week-photo-caption">Completed applet — lights off → send 0 to LED feed</figcaption></figure>
+      </div>
+      <h5 class="iot-h5">Adafruit IO dashboard / feed</h5>
+      <p class="iot-body">The same dashboard and feed from Task 2 were used. Voice commands appear in the feed history as new <code>1</code> / <code>0</code> entries, just like toggle presses (see the feed history and dashboard screenshots in Task 2).</p>
+      <h5 class="iot-h5">Working prototype</h5>
+      <div class="week-photo-grid" style="margin-bottom:24px;">
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo7.jpeg" alt="Arduino IDE with AdafruitIO_WiFi code and Serial Monitor showing relay and bulb state changes, bulb lit next to the laptop"><figcaption class="week-photo-caption">Serial Monitor confirming the feed value switching the relay and bulb</figcaption></figure>
+        <figure class="week-photo-grid-item"><img src="assets/task3-photo8.jpeg" alt="Close-up of the ESP32, relay module, and 230V bulb setup reused from Task 2"><figcaption class="week-photo-caption">The Task 2 ESP32 + relay + bulb setup, now voice controlled</figcaption></figure>
+      </div>
       <figure class="week-photo-figure" style="margin:0 0 24px;">
         <img src="assets/task3-photo9.jpeg" alt="Testing the voice command to Google Assistant on a phone with the bulb on the desk">
-        <figcaption class="week-photo-caption">Speaking the "Ok Google, activate lights on / lights off" command and watching the bulb respond</figcaption>
+        <figcaption class="week-photo-caption">Speaking "Ok Google, activate lights on / off" and watching the bulb respond</figcaption>
       </figure>
-
-      <div class="week-video-wrap">
+      <h5 class="iot-h5">Demo video: complete automation</h5>
+      <div class="week-video-wrap iot-demo">
         <video controls preload="metadata" playsinline class="week-local-video" title="Full demo of voice-controlled bulb using Google Assistant and IFTTT">
           <source src="assets/task3-video.mp4" type="video/mp4">
           Your browser does not support the video element.
         </video>
       </div>
-      <figcaption class="week-photo-caption" style="text-align:center;margin-bottom:6px;">Full demo — turning the bulb on and off with "Ok Google, activate lights on / lights off"</figcaption>
+      <p class="week-photo-caption iot-cap">Full demo — spoken command to bulb response</p>
 
-      <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;margin-top:18px;">
-        <strong>Result:</strong> a bulb controlled entirely by voice, through the full chain of spoken command → Google Assistant → IFTTT applet → Adafruit IO feed → ESP32 → relay → bulb — reaching the same physical outcome as Task 2's dashboard toggle, but through a completely different, hands-free trigger path.
-      </p>
-    </div>
+      <h4 class="iot-h4" id="t3-tests">Testing under different conditions</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Test</th><th>Expected</th><th>Observed</th></tr></thead>
+        <tbody>
+          <tr><td>"Activate lights on" on the phone</td><td>Bulb ON</td><td>Bulb switched ON within about 1–2 seconds</td></tr>
+          <tr><td>"Activate lights off"</td><td>Bulb OFF</td><td>Bulb switched OFF within about 1–2 seconds</td></tr>
+          <tr><td>Repeating "lights on" while already ON</td><td>No change</td><td>Stayed ON; Serial logged value 1 again</td></tr>
+          <tr><td>Rapid on/off commands</td><td>Follows the last command</td><td>Bulb followed each command with a short delay</td></tr>
+          <tr><td>Dashboard toggle and voice used alternately</td><td>Both work on the same feed</td><td>Both worked; feed history shows both sources</td></tr>
+          <tr><td>ESP32 reset then command</td><td>Reconnects and responds</td><td>Reconnected to Adafruit IO and responded</td></tr>
+          <tr><td>Phone on mobile data instead of Wi-Fi</td><td>Still works (cloud path)</td><td>Worked; the phone only needs internet</td></tr>
+        </tbody>
+      </table></div>
 
-    <!-- ============================================
-         KEY LEARNINGS — combined across Tasks 1, 2 & 3
-         ============================================ -->
-    <div class="card-warm" style="padding:40px 36px;margin-bottom:32px;">
-      <span class="modal-week">Key Learnings</span>
-      <h3 class="modal-title" style="margin-top:12px;">What These Three Tasks Taught Me About IoT & Connectivity</h3>
+      <h4 class="iot-h4" id="t3-problems">Problems and solutions</h4>
+      <div class="iot-scroll"><table class="iot-table">
+        <thead><tr><th>Problem</th><th>Solution</th></tr></thead>
+        <tbody>
+          <tr><td>Assistant said it could not find the scene</td><td>The spoken phrase must match the scene name exactly. Used "activate lights on" and "activate lights off"</td></tr>
+          <tr><td>Applet ran but the bulb did not respond</td><td>Checked the Adafruit IO feed history: the value was arriving, so the fault was elsewhere. Confirmed the feed name was the same <code>LED</code> feed</td></tr>
+          <tr><td>Delay of a second or two</td><td>Expected: the command passes through four cloud services. Accepted as a trade-off of cloud automation</td></tr>
+          <tr><td>Two applets needed for on and off</td><td>Created one applet per state, each sending its own value (1 or 0)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="iot-h4" id="t3-reflect">Key learnings and reflection</h4>
       <div class="modal-entry">
-        <p>Across all three tasks, the same ESP32 ended up talking to the outside world in three completely different ways — and each one taught me something different about how connected devices actually work.</p>
         <ul>
-          <li>A device can be its own server — Task 1 showed that an ESP32 doesn't need any external platform to be controllable; it can host its own web page and respond to requests directly.</li>
-          <li>Cloud platforms like Adafruit IO turn a device into something controllable from anywhere, not just the local network — Task 2's dashboard worked the same whether I was near the board or not.</li>
-          <li>The same feed/value logic can be triggered by completely different inputs — Task 3 proved that a dashboard toggle and a spoken voice command can both drive the exact same <code>handleRelay()</code> function without changing a single line of ESP32 code.</li>
-          <li>Software correctness isn't the whole story — the loose relay connection in Task 2 was a reminder that when behaviour is inconsistent but the code looks right, the problem is very often a physical one.</li>
-          <li>Reusability matters — building Task 2's hardware and feed logic properly meant Task 3 needed zero new wiring, just a new trigger pointed at the same feed.</li>
-          <li>IFTTT is a genuinely useful bridge between consumer voice assistants and IoT platforms like Adafruit IO, without needing to write any Google Assistant integration code myself.</li>
+          <li><strong>A device can be its own server</strong> (Task 1), without any external platform.</li>
+          <li><strong>Cloud platforms add reach.</strong> Adafruit IO made the device controllable from anywhere (Task 2).</li>
+          <li><strong>One feed, many inputs.</strong> A dashboard toggle and a voice command drive the same <code>handleRelay()</code> function with no ESP32 change.</li>
+          <li><strong>Cloud automation = trigger + action.</strong> IFTTT links services I did not have to code myself, at the cost of depending on third-party services and a small delay.</li>
+          <li><strong>Check hardware first</strong> when the logs look correct but the behaviour is not.</li>
+          <li><strong>Reuse pays off.</strong> Because Task 2 was built cleanly, Task 3 needed no new wiring.</li>
         </ul>
       </div>
       <div class="reflection-block" style="margin-top:10px;">
         <div class="reflection-label">Reflection</div>
-        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">Working through these three tasks back to back made it clear that "IoT" isn't one technique — it's a set of different ways to get a device talking to something else, each with its own trade-offs. A local web server is simple and fast but only reachable on the same network. A cloud dashboard like Adafruit IO adds reach and persistence at the cost of depending on an external service. Voice control through IFTTT adds a genuinely different, hands-free interface on top of infrastructure I'd already built. Debugging the loose relay connection in Task 2 was probably the most valuable moment of the week — it taught me to check hardware first when software logs look correct but the physical result doesn't match, a habit I'll carry into every future embedded project.</p>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">IoT is not one technique but several ways of getting a device to talk to something else, each with trade-offs. A local web server is simple and fast but only reachable on the same network. A cloud dashboard adds reach and history but depends on an external service. Voice control through IFTTT adds a hands-free interface on top of infrastructure I had already built. The experience also showed the security side: credentials and mains wiring both need care.</p>
+      </div>
+      <p class="iot-body" style="margin-top:16px;"><strong>Result:</strong> a bulb controlled entirely by voice through the chain spoken command → Google Assistant → IFTTT → Adafruit IO feed → ESP32 → relay → bulb.</p>
+
+      <div class="repo-box">
+        <span class="repo-box-label">Repository</span>
+        <p class="repo-box-desc">Access the source code and documentation for Task 3 — the IFTTT applet screenshots, prototype photos, demo video and a README linking to the Task 2 sketch it reuses.</p>
+        <a class="repo-box-btn" href="https://github.com/akshayam1207-oss/Voice-Controlled-IoT-Automation.git" target="_blank" rel="noopener">View GitHub Repository ↗</a>
       </div>
     </div>
 
@@ -363,7 +700,7 @@
 
 <footer>
   <div class="container">
-    <div class="footer-name">Designed & Developed by Akshaya M</div>
+    <div class="footer-name">Designed &amp; Developed by Akshaya M</div>
     <div class="footer-copy">© 2026 All Rights Reserved</div>
   </div>
 </footer>
@@ -372,8 +709,6 @@
 
 <script src="script.js"></script>
 <script>
-/* Guaranteed back-to-top behavior for this page, independent of script.js,
-   since this page is long and needs the button to reliably show/scroll. */
 (function(){
   const btn = document.getElementById('back-to-top');
   if(!btn) return;
