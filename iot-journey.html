@@ -545,7 +545,8 @@ void loop() {
       <ul class="iot-toc">
         <li><a href="#t3-obj">Objective</a></li><li><a href="#t3-concept">Concepts</a></li><li><a href="#t3-hw">Hardware & software</a></li>
         <li><a href="#t3-applet">Applets</a></li><li><a href="#t3-flow">Data flow</a></li><li><a href="#t3-code">Code</a></li>
-        <li><a href="#t3-proof">Screenshots & photos</a></li><li><a href="#t3-tests">Testing</a></li><li><a href="#t3-problems">Problems</a></li><li><a href="#t3-reflect">Learnings</a></li>
+        <li><a href="#t3-proof">Screenshots & photos</a></li><li><a href="#t3-tests">Testing</a></li><li><a href="#t3-problems">Problems</a></li>
+        <li><a href="#t3-reflect">Reflection</a></li><li><a href="#key-learnings">Learnings</a></li>
       </ul>
 
       <h4 class="iot-h4" id="t3-obj" style="margin-top:0">Objective of the IoT automation</h4>
@@ -671,27 +672,41 @@ void loop() { io.run(); }</code></pre>
         </tbody>
       </table></div>
 
-      <h4 class="iot-h4" id="t3-reflect">Key learnings and reflection</h4>
-      <div class="modal-entry">
-        <ul>
-          <li><strong>A device can be its own server</strong> (Task 1), without any external platform.</li>
-          <li><strong>Cloud platforms add reach.</strong> Adafruit IO made the device controllable from anywhere (Task 2).</li>
-          <li><strong>One feed, many inputs.</strong> A dashboard toggle and a voice command drive the same <code>handleRelay()</code> function with no ESP32 change.</li>
-          <li><strong>Cloud automation = trigger + action.</strong> IFTTT links services I did not have to code myself, at the cost of depending on third-party services and a small delay.</li>
-          <li><strong>Check hardware first</strong> when the logs look correct but the behaviour is not.</li>
-          <li><strong>Reuse pays off.</strong> Because Task 2 was built cleanly, Task 3 needed no new wiring.</li>
-        </ul>
+      <h4 class="iot-h4" id="t3-reflect">Reflection</h4>
+      <div class="reflection-block">
+        <div class="reflection-label">What I learned</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">A dashboard toggle and a spoken voice command can trigger the exact same handleRelay() function without changing a single line of ESP32 code — the device never knows or cares where a feed value came from. IFTTT turned out to be a genuinely useful bridge between consumer voice assistants and IoT platforms like Adafruit IO, without needing to write any Google Assistant integration code myself.</p>
       </div>
-      <div class="reflection-block" style="margin-top:10px;">
-        <div class="reflection-label">Reflection</div>
-        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">IoT is not one technique but several ways of getting a device to talk to something else, each with trade-offs. A local web server is simple and fast but only reachable on the same network. A cloud dashboard adds reach and history but depends on an external service. Voice control through IFTTT adds a hands-free interface on top of infrastructure I had already built. The experience also showed the security side: credentials and mains wiring both need care.</p>
-      </div>
+
       <p class="iot-body" style="margin-top:16px;"><strong>Result:</strong> a bulb controlled entirely by voice through the chain spoken command → Google Assistant → IFTTT → Adafruit IO feed → ESP32 → relay → bulb.</p>
 
       <div class="repo-box">
         <span class="repo-box-label">Repository</span>
         <p class="repo-box-desc">Access the source code and documentation for Task 3 — the IFTTT applet screenshots, prototype photos, demo video and a README linking to the Task 2 sketch it reuses.</p>
         <a class="repo-box-btn" href="https://github.com/akshayam1207-oss/Voice-Controlled-IoT-Automation.git" target="_blank" rel="noopener">View GitHub Repository ↗</a>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         KEY LEARNINGS — combined across Tasks 1, 2 & 3
+         ===================================================== -->
+    <div class="card-warm" id="key-learnings" style="padding:40px 36px;margin-bottom:32px;scroll-margin-top:100px;">
+      <span class="modal-week">Key Learnings</span>
+      <h3 class="modal-title" style="margin-top:12px;">What These Three Tasks Taught Me About IoT &amp; Connectivity</h3>
+      <div class="modal-entry">
+        <p>Across all three tasks, the same ESP32 ended up talking to the outside world in three completely different ways, and each one taught me something different about how connected devices actually work.</p>
+        <ul>
+          <li><strong>A device can be its own server.</strong> Task 1 showed that an ESP32 doesn't need any external platform to be controllable — it can host its own web page and respond to requests directly, with no app or cloud account involved.</li>
+          <li><strong>Cloud platforms add reach.</strong> Adafruit IO made the device controllable from anywhere in Task 2, not just the local network, because publish/subscribe separates the sender from the receiver — the dashboard and the ESP32 never need to know about each other, only the feed that connects them.</li>
+          <li><strong>One feed, many inputs.</strong> Task 3 proved that a dashboard toggle and a spoken voice command can both drive the exact same <code>handleRelay()</code> function without changing a single line of ESP32 code.</li>
+          <li><strong>Cloud automation = trigger + action.</strong> IFTTT linked Google Assistant and Adafruit IO together without me writing or hosting any voice-assistant code myself, at the cost of depending on third-party services and a small (1–2 second) delay.</li>
+          <li><strong>Check hardware first.</strong> The loose relay connection in Task 2 was the clearest lesson of the week — when the Serial Monitor logs look correct but the physical behaviour doesn't match, the problem is very often a soldered joint, not the code.</li>
+          <li><strong>Reuse pays off.</strong> Because Task 2's hardware and feed logic were built cleanly, Task 3 needed zero new wiring — just a new trigger pointed at the same existing feed.</li>
+        </ul>
+      </div>
+      <div class="reflection-block" style="margin-top:10px;">
+        <div class="reflection-label">Reflection</div>
+        <p style="color:var(--ink-soft);font-size:0.95rem;line-height:1.75;">Working through these three tasks back to back made it clear that "IoT" isn't one technique — it's a set of different ways to get a device talking to something else, each with its own trade-offs. A local web server is simple and fast but only reachable on the same network. A cloud dashboard like Adafruit IO adds reach and persistence at the cost of depending on an external service. Voice control through IFTTT adds a genuinely different, hands-free interface on top of infrastructure I'd already built. Debugging the loose relay connection in Task 2 was probably the most valuable moment of the week — it taught me to check hardware first when software logs look correct but the physical result doesn't match, a habit I'll carry into every future embedded project, including the Firebase dashboard work in Tasks 4 and 5.</p>
       </div>
     </div>
 
